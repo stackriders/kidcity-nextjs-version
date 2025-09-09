@@ -5,11 +5,11 @@ import MarketingSection from '@/components/home/MarketingSection';
 
 export default function Home() {
   return (
-    <>
+    <div className="min-h-screen">
       <HeroBanner />
       <CategoryGrid />
       <FeaturedProducts />
       <MarketingSection />
-    </>
+    </div>
   );
 }

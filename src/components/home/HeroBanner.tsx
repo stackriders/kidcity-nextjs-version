@@ -9,36 +9,23 @@ import { Button } from '@/components/ui/button';
 const heroSlides = [
   {
     id: 1,
-    title: "The World's Oldest Toy Store",
-    subtitle: "Since 1760",
-    description: "Discover the magic of play with our incredible collection of toys, games and gifts",
+    title: "The Finest Toy Shop in the World",
+    subtitle: "Welcome to Hamleys",
+    description: "Discover magical toys and games that spark imagination and create unforgettable memories.",
     image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    ctaText: "Shop Now",
-    ctaLink: "/products",
-    badge: "New Collection",
-    color: "from-red-600 via-red-700 to-red-800"
+    cta: "Shop Now",
+    badge: "Since 1760",
+    color: "from-red-600 to-red-800"
   },
   {
     id: 2,
-    title: "Magical Christmas Collection",
-    subtitle: "Make This Christmas Special",
-    description: "Find the perfect gifts that will create memories to last a lifetime",
-    image: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    ctaText: "Explore Gifts",
-    ctaLink: "/christmas",
-    badge: "Limited Time",
-    color: "from-green-600 via-green-700 to-green-800"
-  },
-  {
-    id: 3,
-    title: "Educational Toys That Inspire",
-    subtitle: "Learn Through Play",
-    description: "Discover toys that combine fun with learning for growing minds",
+    title: "Toys That Inspire Wonder",
+    subtitle: "Play. Learn. Grow.",
+    description: "From classic teddy bears to the latest tech toys, find everything your child dreams of.",
     image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    ctaText: "Shop Educational",
-    ctaLink: "/category/educational-toys",
-    badge: "Best Sellers",
-    color: "from-blue-600 via-blue-700 to-blue-800"
+    cta: "Explore Collection",
+    badge: "Trending Now",
+    color: "from-blue-600 to-purple-600"
   }
 ];
 
@@ -142,10 +129,9 @@ export default function HeroBanner() {
                 >
                   <Button
                     size="lg"
-                    className="bg-white text-gray-900 hover:bg-gray-100 font-bold px-10 py-4 rounded-full text-lg shadow-2xl hover:shadow-3xl transition-all duration-300 transform hover:scale-105"
-                    onClick={() => window.location.href = heroSlides[currentSlide].ctaLink}
+                    className="bg-white text-red-600 hover:bg-red-50 font-bold px-8 py-3 rounded-md text-base shadow-lg hover:shadow-xl transition-all duration-300"
                   >
-                    {heroSlides[currentSlide].ctaText}
+                    {heroSlides[currentSlide].cta}
                   </Button>
                 </motion.div>
               </motion.div>
