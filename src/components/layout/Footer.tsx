@@ -1,9 +1,10 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { Facebook, Twitter, Instagram, Youtube, Mail, Phone, MapPin } from 'lucide-react';
+import { subscribeToNewsletter } from '@/lib/firestore';
 
 export default function Footer() {
   const footerSections = [
@@ -39,6 +40,10 @@ export default function Footer() {
     },
   ];
 
+  const [email, setEmail] = useState('');
+  const [isSubscribing, setIsSubscribing] = useState(false);
+  const [subscriptionMessage, setSubscriptionMessage] = useState('');
+
   return (
     <footer className="bg-gray-900 text-white">
       {/* Newsletter Section */}
@@ -54,20 +59,53 @@ export default function Footer() {
             <p className="text-red-100 mb-6 font-medium">
               Be the first to know about new arrivals, exclusive offers, and magical events!
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+            <form 
+              onSubmit={async (e) => {
+                e.preventDefault();
+                if (!email) return;
+                
+                setIsSubscribing(true);
+                const success = await subscribeToNewsletter(email);
+                
+                if (success) {
+                  setSubscriptionMessage('Thank you for subscribing!');
+                  setEmail('');
+                } else {
+                  setSubscriptionMessage('Something went wrong. Please try again.');
+                }
+                setIsSubscribing(false);
+                
+                setTimeout(() => setSubscriptionMessage(''), 3000);
+              }}
+              className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto"
+            >
               <input
                 type="email"
                 placeholder="Enter your email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="flex-1 px-4 py-3 rounded-lg text-gray-900 focus:outline-none focus:ring-2 focus:ring-white bg-white"
+                required
               />
               <motion.button
+                type="submit"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-red-600 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-all duration-200 shadow-lg"
+                disabled={isSubscribing}
+                className="bg-white text-red-600 font-bold px-8 py-3 rounded-lg hover:bg-gray-100 transition-all duration-200 shadow-lg disabled:opacity-50"
               >
-                SUBSCRIBE
+                {isSubscribing ? 'SUBSCRIBING...' : 'SUBSCRIBE'}
               </motion.button>
-            </div>
+            </form>
+            {subscriptionMessage && (
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mt-4 text-white font-medium"
+              >
+                {subscriptionMessage}
+              </motion.p>
+            )}
           </motion.div>
         </div>
       </div>

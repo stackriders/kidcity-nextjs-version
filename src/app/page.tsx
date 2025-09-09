@@ -1,13 +1,15 @@
-import HeroSection from '@/components/home/HeroSection';
-import CategorySection from '@/components/home/CategorySection';
+import HeroBanner from '@/components/home/HeroBanner';
+import CategoryGrid from '@/components/home/CategoryGrid';
 import FeaturedProducts from '@/components/home/FeaturedProducts';
+import MarketingSection from '@/components/home/MarketingSection';
 
 export default function Home() {
   return (
     <>
-      <HeroSection />
-      <CategorySection />
+      <HeroBanner />
+      <CategoryGrid />
       <FeaturedProducts />
+      <MarketingSection />
     </>
   );
 }

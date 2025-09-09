@@ -12,8 +12,8 @@ export const metadata: Metadata = {
   title: 'Hamleys - The Finest Toy Shop in the World | Premium Toys & Games',
   description: 'Discover the magic at Hamleys! Premium toys, educational games, action figures, dolls, and more. The finest toy shop in the world since 1760. Free shipping on orders over ₹999.',
   keywords: 'toys, kids toys, educational toys, action figures, dolls, building blocks, board games, children toys, toy store, online toys',
-  authors: [{ name: 'Hamleys' }],
-  creator: 'Hamleys',
+  authors: [{ name: 'Hamleys India' }],
+  creator: 'Hamleys India',
   publisher: 'Hamleys',
   formatDetection: {
     email: false,
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     telephone: false,
   },
   metadataBase: new URL('https://hamleys.in'),
-  alternates: {
+  alternates: { 
     canonical: '/',
   },
   openGraph: {
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     description: 'Discover the magic at Hamleys with premium toys, educational games, and more. The finest toy shop in the world since 1760.',
     url: 'https://hamleys.in',
     siteName: 'Hamleys',
-    images: [
+    images: [ 
       {
         url: '/og-image.jpg',
         width: 1200,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: 'Hamleys - The Finest Toy Shop in the World',
     description: 'Discover the magic at Hamleys with premium toys and educational games since 1760.',
     images: ['/twitter-image.jpg'],
-    creator: '@hamleysindia',
+    creator: '@HamleysIndia',
   },
   robots: {
     index: true,
@@ -60,7 +60,10 @@ export const metadata: Metadata = {
   },
   verification: {
     google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+    yahoo: 'your-yahoo-verification-code',
   },
+  category: 'shopping',
 };
 
 export default function RootLayout({
@@ -71,6 +74,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -79,6 +83,12 @@ export default function RootLayout({
         <meta name="theme-color" content="#ec4899" />
         <meta name="theme-color" content="#dc2626" />
         <meta name="msapplication-TileColor" content="#dc2626" />
+        <meta name="application-name" content="Hamleys" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="apple-mobile-web-app-title" content="Hamleys" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="preconnect" href="https://images.pexels.com" />
       </head>
       <body className={inter.className}>
         <AuthProvider>
