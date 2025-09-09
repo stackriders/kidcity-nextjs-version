@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 
 const categories = [
@@ -66,7 +65,7 @@ const categories = [
 
 export default function CategorySection() {
   return (
-    <section className="py-20 bg-gray-50">
+    <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -75,10 +74,10 @@ export default function CategorySection() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
             SHOP BY CATEGORY
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover our carefully curated collection of toys, games and gifts for every age and interest.
           </p>
         </motion.div>
@@ -92,16 +91,16 @@ export default function CategorySection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.03 }}
+              whileHover={{ y: -4, scale: 1.02 }}
               className="group"
             >
               <Link href={category.href}>
-                <div className="relative overflow-hidden rounded-xl shadow-md hover:shadow-xl transition-all duration-300 bg-white">
+                <div className="relative overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 bg-white">
                   {/* Background Gradient */}
-                  <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-95`} />
+                  <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-90`} />
                   
                   {/* Background Image */}
-                  <div className="relative h-28 md:h-36">
+                  <div className="relative h-24 md:h-32">
                     <div 
                       className="absolute inset-0 bg-cover bg-center opacity-20 group-hover:opacity-30 transition-opacity duration-300"
                       style={{ backgroundImage: `url(${category.image})` }}
@@ -113,17 +112,16 @@ export default function CategorySection() {
                     {/* Icon */}
                     <motion.div
                       whileHover={{ scale: 1.1 }}
-                      className="text-3xl md:text-4xl mb-2"
+                      className="text-2xl md:text-3xl mb-2"
                     >
                       {category.icon}
                     </motion.div>
                     
                     {/* Category Name */}
-                    <h3 className="font-bold text-white text-xs md:text-sm uppercase tracking-wide group-hover:scale-105 transition-transform duration-200">
+                    <h3 className="font-bold text-white text-xs md:text-sm group-hover:scale-105 transition-transform duration-200">
                       {category.name}
                     </h3>
                   </div>
-
                 </div>
               </Link>
             </motion.div>
@@ -135,7 +133,7 @@ export default function CategorySection() {
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          className="mt-20 bg-white rounded-2xl p-8 shadow-lg"
+          className="mt-16 bg-white rounded-xl p-8 shadow-lg"
         >
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {[
@@ -152,11 +150,11 @@ export default function CategorySection() {
                 transition={{ delay: index * 0.1 }}
                 className="text-center"
               >
-                <div className="text-3xl mb-2">{stat.icon}</div>
-                <div className="text-2xl md:text-3xl font-black text-red-600 mb-1">
+                <div className="text-2xl mb-2">{stat.icon}</div>
+                <div className="text-xl md:text-2xl font-black text-red-600 mb-1">
                   {stat.number}
                 </div>
-                <div className="text-gray-700 font-semibold text-sm uppercase tracking-wide">{stat.label}</div>
+                <div className="text-gray-700 font-semibold text-sm">{stat.label}</div>
               </motion.div>
             ))}
           </div>

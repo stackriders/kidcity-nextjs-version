@@ -28,9 +28,9 @@ export default function Navbar() {
   const { user } = useAuth();
 
   return (
-    <header className="sticky top-0 z-50 bg-white shadow-md">
-      {/* Top Bar - Hamleys Style */}
-      <div className="bg-red-600 text-white text-xs py-1">
+    <header className="sticky top-0 z-50 bg-white shadow-sm">
+      {/* Top Bar */}
+      <div className="bg-red-600 text-white text-xs py-2">
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center space-x-4">
             <div className="flex items-center space-x-1">
@@ -50,47 +50,46 @@ export default function Navbar() {
 
       {/* Main Navigation */}
       <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+        <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center space-x-2">
-            <div className="text-3xl font-bold text-red-600">
+          <Link href="/" className="flex flex-col">
+            <div className="text-2xl font-bold text-red-600">
               HAMLEYS
             </div>
-            <div className="text-xs text-gray-500 -ml-1">
+            <div className="text-xs text-gray-500 -mt-1">
               FINEST TOY SHOP IN THE WORLD
             </div>
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-8">
+          <nav className="hidden lg:flex items-center space-x-6">
             {categories.slice(0, 4).map((category) => (
               <Link
                 key={category}
                 href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
-                className="text-gray-800 hover:text-red-600 font-semibold text-sm uppercase tracking-wide transition-colors duration-200 relative group"
+                className="text-gray-800 hover:text-red-600 font-medium text-sm transition-colors duration-200"
               >
                 {category}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-red-600 transition-all duration-200 group-hover:w-full"></span>
               </Link>
             ))}
           </nav>
 
           {/* Search Bar */}
-          <div className="hidden md:flex items-center flex-1 max-w-lg mx-8">
+          <div className="hidden md:flex items-center flex-1 max-w-md mx-8">
             <div className="relative w-full">
               <Input
                 type="text"
                 placeholder="Search for toys..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-3 rounded-full border-2 border-gray-300 focus:border-red-500 transition-colors bg-gray-50"
+                className="pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:border-red-500 transition-colors"
               />
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             </div>
           </div>
 
           {/* Right Side Icons */}
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             {/* Mobile Search */}
             <Button
               variant="ghost"
@@ -103,7 +102,7 @@ export default function Navbar() {
 
             {/* Wishlist */}
             <Button variant="ghost" size="icon" className="relative">
-              <Heart className="w-6 h-6 text-gray-700" />
+              <Heart className="w-5 h-5 text-gray-700" />
               <span className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center">
                 0
               </span>
@@ -112,7 +111,7 @@ export default function Navbar() {
             {/* Cart */}
             <Link href="/cart">
               <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="w-6 h-6 text-gray-700" />
+                <ShoppingCart className="w-5 h-5 text-gray-700" />
                 {itemCount > 0 && (
                   <motion.span
                     initial={{ scale: 0 }}
@@ -128,7 +127,7 @@ export default function Navbar() {
             {/* User Account */}
             <Link href={user ? "/account" : "/auth"}>
               <Button variant="ghost" size="icon">
-                <User className="w-6 h-6 text-gray-700" />
+                <User className="w-5 h-5 text-gray-700" />
               </Button>
             </Link>
 
@@ -146,7 +145,7 @@ export default function Navbar() {
                     <Link
                       key={category}
                       href={`/category/${category.toLowerCase().replace(/\s+/g, '-')}`}
-                      className="text-gray-800 hover:text-red-600 font-semibold py-3 border-b border-gray-100 uppercase text-sm"
+                      className="text-gray-800 hover:text-red-600 font-medium py-2 border-b border-gray-100"
                     >
                       {category}
                     </Link>
@@ -172,7 +171,7 @@ export default function Navbar() {
                   placeholder="Search for toys..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-10 pr-4 py-3 rounded-full border-2 border-gray-300 focus:border-red-500 bg-gray-50"
+                  className="pl-10 pr-4 py-2 rounded-md border border-gray-300 focus:border-red-500"
                 />
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
               </div>

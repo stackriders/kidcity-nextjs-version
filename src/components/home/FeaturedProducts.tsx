@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { Star, Heart, ShoppingCart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -99,7 +98,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -108,16 +107,16 @@ export default function FeaturedProducts() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">
             FEATURED PRODUCTS
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover our most popular toys and games, carefully selected for quality, fun and educational value.
           </p>
         </motion.div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {featuredProducts.map((product, index) => (
             <motion.div
               key={product.id}
@@ -125,20 +124,20 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
+              whileHover={{ y: -4 }}
               className="group"
             >
-              <Card className="overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 bg-white rounded-lg">
+              <Card className="overflow-hidden border border-gray-200 shadow-md hover:shadow-lg transition-all duration-300 bg-white rounded-lg">
                 <div className="relative">
                   {/* Product Image */}
-                  <div className="relative h-56 md:h-64 overflow-hidden bg-gray-50">
+                  <div className="relative h-48 overflow-hidden bg-gray-50">
                     <div 
                       className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
                       style={{ backgroundImage: `url(${product.image})` }}
                     />
                     
                     {/* Badge */}
-                    <div className={`absolute top-3 left-3 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide`}>
+                    <div className={`absolute top-3 left-3 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-2 py-1 rounded text-xs font-bold`}>
                       {product.badge}
                     </div>
 
@@ -162,9 +161,9 @@ export default function FeaturedProducts() {
                     </motion.button>
                   </div>
 
-                  <CardContent className="p-4 md:p-5">
+                  <CardContent className="p-4">
                     {/* Category */}
-                    <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide font-medium">{product.category}</p>
+                    <p className="text-xs text-gray-500 mb-2 font-medium">{product.category}</p>
                     
                     {/* Product Name */}
                     <h3 className="font-bold text-lg text-gray-900 mb-3 line-clamp-2 group-hover:text-red-600 transition-colors">
@@ -172,7 +171,7 @@ export default function FeaturedProducts() {
                     </h3>
 
                     {/* Rating */}
-                    <div className="flex items-center space-x-1 mb-4">
+                    <div className="flex items-center space-x-1 mb-3">
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
                           <Star
@@ -185,7 +184,7 @@ export default function FeaturedProducts() {
                           />
                         ))}
                       </div>
-                      <span className="text-sm text-gray-600 font-medium">
+                      <span className="text-sm text-gray-600">
                         {product.rating} ({product.reviews})
                       </span>
                     </div>
@@ -193,10 +192,10 @@ export default function FeaturedProducts() {
                     {/* Price */}
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
-                        <span className="text-2xl font-black text-red-600">
+                        <span className="text-xl font-black text-red-600">
                           ₹{product.price.toLocaleString()}
                         </span>
-                        <span className="text-sm text-gray-500 line-through font-medium">
+                        <span className="text-sm text-gray-500 line-through">
                           ₹{product.originalPrice.toLocaleString()}
                         </span>
                       </div>
@@ -208,7 +207,7 @@ export default function FeaturedProducts() {
                     {/* Add to Cart Button */}
                     <Button
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded-md transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
                     >
                       ADD TO CART
                     </Button>
@@ -228,7 +227,7 @@ export default function FeaturedProducts() {
         >
           <Button
             size="lg"
-            className="bg-gray-900 hover:bg-black text-white font-bold px-10 py-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
+            className="bg-gray-900 hover:bg-black text-white font-bold px-8 py-3 rounded-md transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
             VIEW ALL PRODUCTS
           </Button>

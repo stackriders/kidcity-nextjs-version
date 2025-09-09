@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const heroSlides = [
@@ -26,16 +25,6 @@ const heroSlides = [
     cta: "Explore Collection",
     badge: "Trending Now",
     color: "from-blue-600 to-purple-600"
-  },
-  {
-    id: 3,
-    title: "Adventure Awaits",
-    subtitle: "Outdoor Fun & Games",
-    description: "Bikes, scooters, sports equipment and outdoor toys for endless adventures.",
-    image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    cta: "Start Adventure",
-    badge: "Outdoor Collection",
-    color: "from-green-600 to-teal-600"
   }
 ];
 
@@ -59,7 +48,7 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative h-[60vh] md:h-[70vh] overflow-hidden bg-white">
+    <section className="relative h-96 md:h-[500px] overflow-hidden bg-gray-100">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -69,7 +58,7 @@ export default function HeroSection() {
           transition={{ duration: 0.5, ease: "easeInOut" }}
           className="absolute inset-0"
         >
-          <div className={`absolute inset-0 bg-gradient-to-r ${heroSlides[currentSlide].color} opacity-85`} />
+          <div className={`absolute inset-0 bg-gradient-to-r ${heroSlides[currentSlide].color} opacity-90`} />
           
           {/* Background Image */}
           <div 
@@ -85,16 +74,16 @@ export default function HeroSection() {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.6 }}
-                className="text-white space-y-6"
+                className="text-white space-y-4"
               >
                 {/* Badge */}
                 <motion.div
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                  className="inline-flex items-center space-x-2 bg-white/25 backdrop-blur-sm rounded-full px-4 py-2 border border-white/30"
+                  className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 border border-white/30"
                 >
-                  <span className="text-sm font-bold uppercase tracking-wide">{heroSlides[currentSlide].badge}</span>
+                  <span className="text-sm font-bold">{heroSlides[currentSlide].badge}</span>
                 </motion.div>
 
                 {/* Main Title */}
@@ -103,7 +92,7 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.6 }}
-                    className="text-xl md:text-2xl font-bold mb-2 opacity-95 tracking-wide"
+                    className="text-lg md:text-xl font-bold mb-2"
                   >
                     {heroSlides[currentSlide].subtitle}
                   </motion.h2>
@@ -111,7 +100,7 @@ export default function HeroSection() {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 0.6 }}
-                    className="text-3xl md:text-5xl font-black leading-tight tracking-tight"
+                    className="text-2xl md:text-4xl font-black leading-tight"
                   >
                     {heroSlides[currentSlide].title}
                   </motion.h1>
@@ -122,7 +111,7 @@ export default function HeroSection() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5, duration: 0.6 }}
-                  className="text-lg md:text-xl opacity-95 max-w-lg leading-relaxed font-medium"
+                  className="text-base md:text-lg opacity-95 max-w-lg leading-relaxed"
                 >
                   {heroSlides[currentSlide].description}
                 </motion.p>
@@ -135,7 +124,7 @@ export default function HeroSection() {
                 >
                   <Button
                     size="lg"
-                    className="bg-white text-red-600 hover:bg-red-50 font-bold px-10 py-4 rounded-full text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border-2 border-white"
+                    className="bg-white text-red-600 hover:bg-red-50 font-bold px-8 py-3 rounded-md text-base shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     {heroSlides[currentSlide].cta}
                   </Button>
@@ -147,13 +136,11 @@ export default function HeroSection() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.7, duration: 0.8 }}
-                className="hidden lg:block"
+                className="hidden lg:block text-right"
               >
-                <div className="text-right">
-                  <div className="text-white/80 text-sm font-medium mb-2">TRUSTED SINCE 1760</div>
-                  <div className="text-white text-4xl font-black">260+</div>
-                  <div className="text-white/90 text-sm">YEARS OF MAGIC</div>
-                </div>
+                <div className="text-white/80 text-sm font-medium mb-2">TRUSTED SINCE 1760</div>
+                <div className="text-white text-3xl font-black">260+</div>
+                <div className="text-white/90 text-sm">YEARS OF MAGIC</div>
               </motion.div>
             </div>
           </div>
@@ -163,25 +150,25 @@ export default function HeroSection() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 z-20 bg-white/25 backdrop-blur-sm hover:bg-white/40 rounded-full p-3 transition-all duration-200 border border-white/30"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/25 backdrop-blur-sm hover:bg-white/40 rounded-full p-2 transition-all duration-200"
       >
-        <ChevronLeft className="w-6 h-6 text-white" />
+        <ChevronLeft className="w-5 h-5 text-white" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 bg-white/25 backdrop-blur-sm hover:bg-white/40 rounded-full p-3 transition-all duration-200 border border-white/30"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white/25 backdrop-blur-sm hover:bg-white/40 rounded-full p-2 transition-all duration-200"
       >
-        <ChevronRight className="w-6 h-6 text-white" />
+        <ChevronRight className="w-5 h-5 text-white" />
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
         {heroSlides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
-            className={`w-3 h-3 rounded-full transition-all duration-300 border border-white/50 ${
-              index === currentSlide ? 'bg-white scale-125' : 'bg-white/40'
+            className={`w-2 h-2 rounded-full transition-all duration-300 ${
+              index === currentSlide ? 'bg-white scale-125' : 'bg-white/50'
             }`}
           />
         ))}

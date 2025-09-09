@@ -55,28 +55,8 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
   }
-}
-
-/* Custom animations */
-@keyframes bounce-gentle {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.animate-bounce-gentle {
-  animation: bounce-gentle 2s ease-in-out infinite;
-}
-
-/* Hamleys brand colors */
-:root {
-  --hamleys-red: #dc2626;
-  --hamleys-red-dark: #b91c1c;
-  --hamleys-red-light: #ef4444;
 }
 
 /* Smooth scrolling */
@@ -94,12 +74,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--hamleys-red);
+  background: #dc2626;
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--hamleys-red-dark);
+  background: #b91c1c;
 }
 
 /* Line clamp utility */
@@ -110,38 +90,10 @@ html {
   overflow: hidden;
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, var(--hamleys-red), var(--hamleys-red-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Playful button hover effects */
-.btn-playful {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.btn-playful:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
-}
-
-/* Card hover effects */
-.card-hover {
-  transition: all 0.3s ease;
-}
-
-.card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-}
-
 /* Loading spinner */
 .spinner {
   border: 2px solid #f3f3f3;
-  border-top: 2px solid var(--hamleys-red);
+  border-top: 2px solid #dc2626;
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -158,19 +110,6 @@ html {
   @apply focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
 }
 
-/* Hamleys specific styles */
-.hamleys-red {
-  color: var(--hamleys-red);
-}
-
-.hamleys-bg-red {
-  background-color: var(--hamleys-red);
-}
-
-.hamleys-border-red {
-  border-color: var(--hamleys-red);
-}
-
 /* Responsive text sizes */
 @media (max-width: 640px) {
   .text-responsive-xl {
@@ -184,27 +123,4 @@ html {
     font-size: 2rem;
     line-height: 2.5rem;
   }
-}
-
-/* Custom animations for page transitions */
-.page-enter {
-  opacity: 0;
-  transform: translateY(20px);
-}
-
-.page-enter-active {
-  opacity: 1;
-  transform: translateY(0);
-  transition: opacity 300ms, transform 300ms;
-}
-
-.page-exit {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.page-exit-active {
-  opacity: 0;
-  transform: translateY(-20px);
-  transition: opacity 300ms, transform 300ms;
 }
