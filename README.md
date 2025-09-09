@@ -1,0 +1,1 @@
+# kidcity-nextjs-version
