@@ -22,7 +22,7 @@ const heroSlides = [
     title: "Toys That Inspire Wonder",
     subtitle: "Play. Learn. Grow.",
     description: "From classic teddy bears to the latest tech toys, find everything your child dreams of.",
-    image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    image: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1200",
     cta: "Explore Collection",
     badge: "Trending Now",
     color: "from-blue-600 to-purple-600"
@@ -129,7 +129,7 @@ export default function HeroBanner() {
                 >
                   <Button
                     size="lg"
-                    className="bg-white text-red-600 hover:bg-red-50 font-bold px-8 py-3 rounded-md text-base shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-white text-red-600 hover:bg-red-50 font-bold px-8 py-4 rounded-lg text-lg shadow-lg hover:shadow-xl transition-all duration-300"
                   >
                     {heroSlides[currentSlide].cta}
                   </Button>

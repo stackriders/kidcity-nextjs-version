@@ -80,7 +80,7 @@ export default function Navbar() {
               onMouseEnter={() => setShowCategoriesMenu(true)}
               onMouseLeave={() => setShowCategoriesMenu(false)}
             >
-              <button className="flex items-center space-x-1 text-gray-800 hover:text-red-600 font-semibold text-sm transition-colors duration-200">
+              <button className="flex items-center space-x-1 text-gray-800 hover:text-red-600 font-bold text-sm transition-colors duration-200 uppercase tracking-wide">
                 <span>CATEGORIES</span>
                 <ChevronDown className="w-4 h-4" />
               </button>
@@ -115,7 +115,7 @@ export default function Navbar() {
               onMouseEnter={() => setShowAgeMenu(true)}
               onMouseLeave={() => setShowAgeMenu(false)}
             >
-              <button className="flex items-center space-x-1 text-gray-800 hover:text-red-600 font-semibold text-sm transition-colors duration-200">
+              <button className="flex items-center space-x-1 text-gray-800 hover:text-red-600 font-bold text-sm transition-colors duration-200 uppercase tracking-wide">
                 <span>SHOP BY AGE</span>
                 <ChevronDown className="w-4 h-4" />
               </button>
@@ -144,13 +144,13 @@ export default function Navbar() {
               </AnimatePresence>
             </div>
 
-            <Link href="/brands" className="text-gray-800 hover:text-red-600 font-semibold text-sm transition-colors duration-200">
+            <Link href="/brands" className="text-gray-800 hover:text-red-600 font-bold text-sm transition-colors duration-200 uppercase tracking-wide">
               BRANDS
             </Link>
-            <Link href="/new-arrivals" className="text-gray-800 hover:text-red-600 font-semibold text-sm transition-colors duration-200">
+            <Link href="/new-arrivals" className="text-gray-800 hover:text-red-600 font-bold text-sm transition-colors duration-200 uppercase tracking-wide">
               NEW ARRIVALS
             </Link>
-            <Link href="/sale" className="text-red-600 hover:text-red-700 font-bold text-sm transition-colors duration-200">
+            <Link href="/sale" className="text-red-600 hover:text-red-700 font-black text-sm transition-colors duration-200 uppercase tracking-wide">
               SALE
             </Link>
           </nav>
