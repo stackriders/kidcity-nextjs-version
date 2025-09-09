@@ -78,7 +78,7 @@ const featuredProducts = [
 ];
 
 const badgeColors = {
-  'Best Seller': 'bg-red-500',
+  'Best Seller': 'bg-red-600',
   'New': 'bg-green-500',
   'Popular': 'bg-blue-500',
   'Sale': 'bg-orange-500',
@@ -99,7 +99,7 @@ export default function FeaturedProducts() {
   };
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-50 to-purple-50">
+    <section className="py-20 bg-white">
       <div className="container mx-auto px-4">
         {/* Section Header */}
         <motion.div
@@ -108,16 +108,16 @@ export default function FeaturedProducts() {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-            ✨ Featured Toys
+          <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 tracking-tight">
+            FEATURED PRODUCTS
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Handpicked favorites that kids absolutely love! From educational games to action-packed adventures.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto font-medium">
+            Discover our most popular toys and games, carefully selected for quality, fun and educational value.
           </p>
         </motion.div>
 
         {/* Products Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {featuredProducts.map((product, index) => (
             <motion.div
               key={product.id}
@@ -125,22 +125,20 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
+              whileHover={{ y: -8 }}
               className="group"
             >
-              <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white">
+              <Card className="overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all duration-300 bg-white rounded-lg">
                 <div className="relative">
                   {/* Product Image */}
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={product.image}
-                      alt={product.name}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-300"
+                  <div className="relative h-56 md:h-64 overflow-hidden bg-gray-50">
+                    <div 
+                      className="absolute inset-0 bg-cover bg-center group-hover:scale-105 transition-transform duration-300"
+                      style={{ backgroundImage: `url(${product.image})` }}
                     />
                     
                     {/* Badge */}
-                    <div className={`absolute top-3 left-3 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-2 py-1 rounded-full text-xs font-bold`}>
+                    <div className={`absolute top-3 left-3 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide`}>
                       {product.badge}
                     </div>
 
@@ -148,9 +146,9 @@ export default function FeaturedProducts() {
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                      className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-md"
                     >
-                      <Heart className="w-4 h-4 text-gray-600 hover:text-red-500 transition-colors" />
+                      <Heart className="w-4 h-4 text-gray-700 hover:text-red-600 transition-colors" />
                     </motion.button>
 
                     {/* Quick Add to Cart */}
@@ -158,23 +156,23 @@ export default function FeaturedProducts() {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       onClick={() => handleAddToCart(product)}
-                      className="absolute bottom-3 right-3 bg-pink-500 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg"
+                      className="absolute bottom-3 right-3 bg-red-600 text-white rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 shadow-lg"
                     >
                       <ShoppingCart className="w-4 h-4" />
                     </motion.button>
                   </div>
 
-                  <CardContent className="p-4">
+                  <CardContent className="p-4 md:p-5">
                     {/* Category */}
-                    <p className="text-sm text-gray-500 mb-1">{product.category}</p>
+                    <p className="text-xs text-gray-500 mb-2 uppercase tracking-wide font-medium">{product.category}</p>
                     
                     {/* Product Name */}
-                    <h3 className="font-bold text-lg text-gray-800 mb-2 line-clamp-2 group-hover:text-pink-600 transition-colors">
+                    <h3 className="font-bold text-lg text-gray-900 mb-3 line-clamp-2 group-hover:text-red-600 transition-colors">
                       {product.name}
                     </h3>
 
                     {/* Rating */}
-                    <div className="flex items-center space-x-1 mb-3">
+                    <div className="flex items-center space-x-1 mb-4">
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
                           <Star
@@ -187,7 +185,7 @@ export default function FeaturedProducts() {
                           />
                         ))}
                       </div>
-                      <span className="text-sm text-gray-600">
+                      <span className="text-sm text-gray-600 font-medium">
                         {product.rating} ({product.reviews})
                       </span>
                     </div>
@@ -195,14 +193,14 @@ export default function FeaturedProducts() {
                     {/* Price */}
                     <div className="flex items-center justify-between mb-4">
                       <div className="flex items-center space-x-2">
-                        <span className="text-2xl font-bold text-pink-600">
+                        <span className="text-2xl font-black text-red-600">
                           ₹{product.price.toLocaleString()}
                         </span>
-                        <span className="text-sm text-gray-500 line-through">
+                        <span className="text-sm text-gray-500 line-through font-medium">
                           ₹{product.originalPrice.toLocaleString()}
                         </span>
                       </div>
-                      <div className="text-sm font-medium text-green-600">
+                      <div className="text-sm font-bold text-green-600">
                         {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                       </div>
                     </div>
@@ -210,9 +208,9 @@ export default function FeaturedProducts() {
                     {/* Add to Cart Button */}
                     <Button
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-2 rounded-lg transition-all duration-200 transform hover:scale-105"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-md hover:shadow-lg"
                     >
-                      Add to Cart
+                      ADD TO CART
                     </Button>
                   </CardContent>
                 </div>
@@ -230,10 +228,9 @@ export default function FeaturedProducts() {
         >
           <Button
             size="lg"
-            variant="outline"
-            className="border-2 border-pink-500 text-pink-600 hover:bg-pink-500 hover:text-white font-bold px-8 py-3 rounded-full transition-all duration-200"
+            className="bg-gray-900 hover:bg-black text-white font-bold px-10 py-4 rounded-lg transition-all duration-200 transform hover:scale-105 shadow-lg"
           >
-            View All Products
+            VIEW ALL PRODUCTS
           </Button>
         </motion.div>
       </div>

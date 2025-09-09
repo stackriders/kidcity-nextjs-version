@@ -72,6 +72,13 @@
   animation: bounce-gentle 2s ease-in-out infinite;
 }
 
+/* Hamleys brand colors */
+:root {
+  --hamleys-red: #dc2626;
+  --hamleys-red-dark: #b91c1c;
+  --hamleys-red-light: #ef4444;
+}
+
 /* Smooth scrolling */
 html {
   scroll-behavior: smooth;
@@ -87,12 +94,12 @@ html {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #ec4899;
+  background: var(--hamleys-red);
   border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #db2777;
+  background: var(--hamleys-red-dark);
 }
 
 /* Line clamp utility */
@@ -105,7 +112,7 @@ html {
 
 /* Gradient text */
 .gradient-text {
-  background: linear-gradient(135deg, #ec4899, #8b5cf6);
+  background: linear-gradient(135deg, var(--hamleys-red), var(--hamleys-red-dark));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -118,7 +125,7 @@ html {
 
 .btn-playful:hover {
   transform: translateY(-2px) scale(1.05);
-  box-shadow: 0 10px 25px rgba(236, 72, 153, 0.3);
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
 }
 
 /* Card hover effects */
@@ -134,7 +141,7 @@ html {
 /* Loading spinner */
 .spinner {
   border: 2px solid #f3f3f3;
-  border-top: 2px solid #ec4899;
+  border-top: 2px solid var(--hamleys-red);
   border-radius: 50%;
   width: 20px;
   height: 20px;
@@ -148,7 +155,20 @@ html {
 
 /* Focus styles for accessibility */
 .focus-ring {
-  @apply focus:outline-none focus:ring-2 focus:ring-pink-500 focus:ring-offset-2;
+  @apply focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+}
+
+/* Hamleys specific styles */
+.hamleys-red {
+  color: var(--hamleys-red);
+}
+
+.hamleys-bg-red {
+  background-color: var(--hamleys-red);
+}
+
+.hamleys-border-red {
+  border-color: var(--hamleys-red);
 }
 
 /* Responsive text sizes */

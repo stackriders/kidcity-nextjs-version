@@ -9,32 +9,32 @@ import Footer from '@/components/layout/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'KidCity - Magical Toys for Every Child | Premium Toy Store',
-  description: 'Discover the magic of childhood with KidCity! Premium toys, educational games, action figures, dolls, and more. Free shipping on orders over ₹999. Shop now!',
+  title: 'Hamleys - The Finest Toy Shop in the World | Premium Toys & Games',
+  description: 'Discover the magic at Hamleys! Premium toys, educational games, action figures, dolls, and more. The finest toy shop in the world since 1760. Free shipping on orders over ₹999.',
   keywords: 'toys, kids toys, educational toys, action figures, dolls, building blocks, board games, children toys, toy store, online toys',
-  authors: [{ name: 'KidCity Team' }],
-  creator: 'KidCity',
-  publisher: 'KidCity',
+  authors: [{ name: 'Hamleys' }],
+  creator: 'Hamleys',
+  publisher: 'Hamleys',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL('https://kidcity.com'),
+  metadataBase: new URL('https://hamleys.in'),
   alternates: {
     canonical: '/',
   },
   openGraph: {
-    title: 'KidCity - Magical Toys for Every Child',
-    description: 'Discover the magic of childhood with premium toys, educational games, and more. Free shipping on orders over ₹999.',
-    url: 'https://kidcity.com',
-    siteName: 'KidCity',
+    title: 'Hamleys - The Finest Toy Shop in the World',
+    description: 'Discover the magic at Hamleys with premium toys, educational games, and more. The finest toy shop in the world since 1760.',
+    url: 'https://hamleys.in',
+    siteName: 'Hamleys',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'KidCity - Premium Toy Store',
+        alt: 'Hamleys - The Finest Toy Shop in the World',
       },
     ],
     locale: 'en_IN',
@@ -42,10 +42,10 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'KidCity - Magical Toys for Every Child',
-    description: 'Discover the magic of childhood with premium toys and educational games.',
+    title: 'Hamleys - The Finest Toy Shop in the World',
+    description: 'Discover the magic at Hamleys with premium toys and educational games since 1760.',
     images: ['/twitter-image.jpg'],
-    creator: '@kidcitystore',
+    creator: '@hamleysindia',
   },
   robots: {
     index: true,
@@ -77,7 +77,8 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#ec4899" />
-        <meta name="msapplication-TileColor" content="#ec4899" />
+        <meta name="theme-color" content="#dc2626" />
+        <meta name="msapplication-TileColor" content="#dc2626" />
       </head>
       <body className={inter.className}>
         <AuthProvider>

@@ -7,6 +7,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/admin/', '/api/', '/private/'],
     },
-    sitemap: 'https://kidcity.com/sitemap.xml',
+    sitemap: 'https://hamleys.in/sitemap.xml',
   };
 }
