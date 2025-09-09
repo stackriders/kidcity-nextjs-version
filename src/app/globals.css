@@ -156,3 +156,42 @@ img[loading="lazy"].loaded {
   transform: translateY(-8px);
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
+
+/* Hamleys specific styles */
+.hamleys-gradient {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+}
+
+.hamleys-shadow {
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15);
+}
+
+.hamleys-shadow-lg {
+  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
+}
+
+/* Custom animations for Hamleys */
+@keyframes hamleys-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.hamleys-bounce {
+  animation: hamleys-bounce 2s ease-in-out infinite;
+}
+
+/* Improved button styles */
+.hamleys-button {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hamleys-button:hover {
+  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+}

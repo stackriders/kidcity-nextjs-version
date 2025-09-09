@@ -3,29 +3,39 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 const heroSlides = [
   {
     id: 1,
-    title: "The Finest Toy Shop in the World",
+    title: "The World's Oldest Toy Store",
     subtitle: "Welcome to Hamleys",
-    description: "Discover magical toys and games that spark imagination and create unforgettable memories.",
+    description: "Discover the magic of play with our incredible collection of toys, games and gifts for every age.",
     image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
     cta: "Shop Now",
     badge: "Since 1760",
-    color: "from-red-600 to-red-800"
+    color: "from-red-600 via-red-700 to-red-800"
   },
   {
     id: 2,
-    title: "Toys That Inspire Wonder",
-    subtitle: "Play. Learn. Grow.",
-    description: "From classic teddy bears to the latest tech toys, find everything your child dreams of.",
+    title: "New Arrivals Just Landed",
+    subtitle: "Fresh & Exciting",
+    description: "Be the first to discover our latest collection of amazing toys and games from top brands.",
     image: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    cta: "Explore Collection",
-    badge: "Trending Now",
-    color: "from-blue-600 to-purple-600"
+    cta: "Explore New",
+    badge: "New Collection",
+    color: "from-blue-600 via-purple-600 to-pink-600"
+  },
+  {
+    id: 3,
+    title: "Mega Sale Up to 50% Off",
+    subtitle: "Limited Time Offer",
+    description: "Don't miss out on incredible savings across thousands of toys and games.",
+    image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
+    cta: "Shop Sale",
+    badge: "Save Big",
+    color: "from-orange-500 via-red-500 to-pink-500"
   }
 ];
 
@@ -35,7 +45,7 @@ export default function HeroBanner() {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
-    }, 6000);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, []);
@@ -49,14 +59,14 @@ export default function HeroBanner() {
   };
 
   return (
-    <section className="relative h-[500px] md:h-[600px] overflow-hidden">
+    <section className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-900">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.8, ease: "easeInOut" }}
+          initial={{ opacity: 0, scale: 1.1 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0.9 }}
+          transition={{ duration: 0.7, ease: "easeInOut" }}
           className="absolute inset-0"
         >
           {/* Background Image */}
@@ -68,54 +78,55 @@ export default function HeroBanner() {
               className="object-cover"
               priority={currentSlide === 0}
             />
-            <div className={`absolute inset-0 bg-gradient-to-r ${heroSlides[currentSlide].color} opacity-85`} />
+            <div className={`absolute inset-0 bg-gradient-to-r ${heroSlides[currentSlide].color} opacity-80`} />
           </div>
 
           {/* Content */}
           <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-            <div className="max-w-3xl text-white">
+            <div className="max-w-2xl text-white">
               <motion.div
-                initial={{ opacity: 0, y: 50 }}
+                initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.3, duration: 0.8 }}
+                transition={{ delay: 0.2, duration: 0.8 }}
                 className="space-y-6"
               >
                 {/* Badge */}
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  transition={{ delay: 0.5, type: "spring", stiffness: 200 }}
-                  className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-6 py-2 border border-white/30"
+                  initial={{ scale: 0, rotate: -10 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
+                  className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 border border-white/30"
                 >
+                  <Star className="w-4 h-4 mr-2 text-yellow-300" />
                   <span className="text-sm font-bold tracking-wide">{heroSlides[currentSlide].badge}</span>
                 </motion.div>
 
                 {/* Subtitle */}
                 <motion.h2
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                  className="text-xl md:text-2xl font-bold tracking-wide opacity-90"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="text-lg md:text-xl font-bold tracking-wide opacity-90"
                 >
                   {heroSlides[currentSlide].subtitle}
                 </motion.h2>
 
                 {/* Main Title */}
                 <motion.h1
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className="text-4xl md:text-6xl font-black leading-tight tracking-tight"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                  className="text-3xl md:text-5xl lg:text-6xl font-black leading-tight tracking-tight"
                 >
                   {heroSlides[currentSlide].title}
                 </motion.h1>
 
                 {/* Description */}
                 <motion.p
-                  initial={{ opacity: 0, y: 30 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.8 }}
-                  className="text-lg md:text-xl opacity-95 max-w-2xl leading-relaxed"
+                  initial={{ opacity: 0, x: -30 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.5, duration: 0.8 }}
+                  className="text-base md:text-lg opacity-95 max-w-xl leading-relaxed"
                 >
                   {heroSlides[currentSlide].description}
                 </motion.p>
@@ -124,18 +135,36 @@ export default function HeroBanner() {
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.7, duration: 0.8 }}
-                  className="pt-4"
+                  transition={{ delay: 0.6, duration: 0.8 }}
+                  className="pt-2"
                 >
                   <Button
                     size="lg"
-                    className="bg-white text-red-600 hover:bg-red-50 font-bold px-8 py-4 rounded-lg text-lg shadow-lg hover:shadow-xl transition-all duration-300"
+                    className="bg-white text-red-600 hover:bg-red-50 font-black px-8 py-4 rounded-full text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                   >
                     {heroSlides[currentSlide].cta}
                   </Button>
                 </motion.div>
               </motion.div>
             </div>
+
+            {/* Right Side Stats - Hamleys Style */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.8, duration: 0.8 }}
+              className="hidden lg:block absolute top-8 right-8 text-white text-right"
+            >
+              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 border border-white/20">
+                <div className="text-sm font-bold mb-2 opacity-80">TRUSTED SINCE</div>
+                <div className="text-5xl font-black mb-1">1760</div>
+                <div className="text-xs opacity-70 mb-4">260+ YEARS OF JOY</div>
+                <div className="border-t border-white/20 pt-4">
+                  <div className="text-2xl font-bold">50M+</div>
+                  <div className="text-xs opacity-70">Happy Customers</div>
+                </div>
+              </div>
+            </motion.div>
           </div>
         </motion.div>
       </AnimatePresence>
@@ -143,21 +172,21 @@ export default function HeroBanner() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-6 top-1/2 transform -translate-y-1/2 z-20 bg-white/25 backdrop-blur-sm hover:bg-white/40 rounded-full p-3 transition-all duration-200 group"
+        className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-200 group"
         aria-label="Previous slide"
       >
         <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-6 top-1/2 transform -translate-y-1/2 z-20 bg-white/25 backdrop-blur-sm hover:bg-white/40 rounded-full p-3 transition-all duration-200 group"
+        className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-200 group"
         aria-label="Next slide"
       >
         <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
+      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
         {heroSlides.map((_, index) => (
           <button
             key={index}
@@ -172,19 +201,8 @@ export default function HeroBanner() {
         ))}
       </div>
 
-      {/* Decorative Elements */}
-      <div className="absolute top-8 right-8 z-10 hidden lg:block">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 1, duration: 0.8 }}
-          className="text-white/80 text-right"
-        >
-          <div className="text-sm font-bold mb-1">TRUSTED SINCE</div>
-          <div className="text-4xl font-black">1760</div>
-          <div className="text-xs opacity-75">260+ YEARS OF MAGIC</div>
-        </motion.div>
-      </div>
+      {/* Bottom Gradient Overlay */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent z-5" />
     </section>
   );
 }

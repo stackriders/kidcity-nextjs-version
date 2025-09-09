@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { ArrowRight } from 'lucide-react';
 
 const categories = [
   {
@@ -102,22 +103,25 @@ export default function CategoryGrid() {
   return (
     <section className="py-16 bg-gray-50">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
+        {/* Section Header - Hamleys Style */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+            <span className="text-2xl">🎯</span>
+          </div>
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight">
             SHOP BY CATEGORY
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our carefully curated collection across all categories
+            Discover our carefully curated collection across all categories - from classic toys to the latest innovations
           </p>
         </motion.div>
 
-        {/* Categories Grid */}
+        {/* Categories Grid - Hamleys Style */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
           {categories.map((category, index) => (
             <motion.div
@@ -132,7 +136,7 @@ export default function CategoryGrid() {
               <Link href={`/category/${category.slug}`}>
                 <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white">
                   {/* Background Image */}
-                  <div className="relative h-32 md:h-40">
+                  <div className="relative h-40 md:h-48">
                     <Image
                       src={category.image}
                       alt={category.name}
@@ -141,24 +145,31 @@ export default function CategoryGrid() {
                       loading="lazy"
                     />
                     <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-85`} />
+                    
+                    {/* Hover Overlay */}
+                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
                   {/* Content */}
-                  <div className="relative z-10 p-4 text-center">
-                    <div className="text-2xl md:text-3xl mb-2">{category.icon}</div>
-                    <h3 className="font-bold text-white text-xs md:text-sm mb-1 group-hover:scale-105 transition-transform duration-200 leading-tight">
+                  <div className="relative z-10 p-4 text-center bg-white">
+                    <div className="text-3xl mb-2">{category.icon}</div>
+                    <h3 className="font-bold text-gray-900 text-sm mb-1 group-hover:text-red-600 transition-colors duration-200 leading-tight">
                       {category.name}
                     </h3>
-                    <p className="text-white/80 text-xs">
-                      {category.productCount}+ items
+                    <p className="text-gray-500 text-xs mb-3">
+                      {category.productCount}+ products
                     </p>
+                    
+                    {/* Shop Now Button */}
+                    <div className="flex items-center justify-center text-red-600 font-bold text-xs group-hover:text-red-700 transition-colors">
+                      <span>Shop Now</span>
+                      <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
+                    </div>
                   </div>
 
-                  {/* Hover Overlay */}
-                  <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center rounded-2xl">
-                    <span className="text-white font-bold text-sm bg-white/20 backdrop-blur-sm px-6 py-2 rounded-full border border-white/30">
-                      Shop Now
-                    </span>
+                  {/* Floating Action */}
+                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <ArrowRight className="w-4 h-4 text-red-600" />
                   </div>
                 </div>
               </Link>
@@ -166,7 +177,7 @@ export default function CategoryGrid() {
           ))}
         </div>
 
-        {/* View All Categories Button */}
+        {/* Bottom CTA */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -177,9 +188,10 @@ export default function CategoryGrid() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200"
+              className="bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200 inline-flex items-center space-x-2"
             >
-              View All Categories
+              <span>View All Categories</span>
+              <ArrowRight className="w-5 h-5" />
             </motion.button>
           </Link>
         </motion.div>

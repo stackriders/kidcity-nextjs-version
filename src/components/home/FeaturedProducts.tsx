@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Star, Heart, ShoppingCart, Eye, Zap } from 'lucide-react';
+import { Star, Heart, ShoppingCart, Eye, Zap, ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
@@ -158,26 +158,25 @@ export default function FeaturedProducts() {
   return (
     <section className="py-16 bg-white">
       <div className="container mx-auto px-4">
-        {/* Section Header */}
+        {/* Section Header - Hamleys Style */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <Zap className="w-6 h-6 text-red-600" />
-            <span className="text-red-600 font-bold text-sm tracking-wide">FEATURED PRODUCTS</span>
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
+            <Zap className="w-8 h-8 text-red-600" />
           </div>
           <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight">
-            TRENDING NOW
+            FEATURED PRODUCTS
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Discover our most popular toys and games, loved by children and parents worldwide
           </p>
         </motion.div>
 
-        {/* Products Grid */}
+        {/* Products Grid - Hamleys Style */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {featuredProducts.map((product, index) => (
             <motion.div
@@ -189,7 +188,7 @@ export default function FeaturedProducts() {
               whileHover={{ y: -8 }}
               className="group"
             >
-              <Card className="overflow-hidden border border-gray-200 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white rounded-2xl h-full">
+              <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white rounded-2xl h-full">
                 <div className="relative">
                   {/* Product Image */}
                   <Link href={`/product/${product.id}`}>
@@ -204,7 +203,7 @@ export default function FeaturedProducts() {
                       
                       {/* Badge */}
                       {product.badge && (
-                        <div className={`absolute top-3 left-3 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-3 py-1 rounded-full text-xs font-bold`}>
+                        <div className={`absolute top-3 left-3 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-3 py-1 rounded-full text-xs font-bold shadow-lg`}>
                           {product.badge}
                         </div>
                       )}
@@ -220,19 +219,19 @@ export default function FeaturedProducts() {
 
                       {/* Discount Badge */}
                       {product.originalPrice > product.price && (
-                        <div className="absolute top-3 right-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold">
+                        <div className="absolute top-3 right-3 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold shadow-lg">
                           {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                         </div>
                       )}
                     </div>
                   </Link>
 
-                  {/* Action Buttons */}
+                  {/* Quick Actions - Hamleys Style */}
                   <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white transition-colors"
+                      className="bg-white/95 backdrop-blur-sm rounded-full p-3 shadow-xl hover:bg-white transition-colors"
                       aria-label="Add to wishlist"
                     >
                       <Heart className="w-5 h-5 text-gray-700 hover:text-red-600 transition-colors" />
@@ -241,7 +240,7 @@ export default function FeaturedProducts() {
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white transition-colors"
+                        className="bg-white/95 backdrop-blur-sm rounded-full p-3 shadow-xl hover:bg-white transition-colors"
                         aria-label="Quick view"
                       >
                         <Eye className="w-5 h-5 text-gray-700 hover:text-blue-600 transition-colors" />
@@ -252,7 +251,7 @@ export default function FeaturedProducts() {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => handleAddToCart(product)}
-                        className="bg-red-600 text-white rounded-full p-3 shadow-lg hover:bg-red-700 transition-colors"
+                        className="bg-red-600 text-white rounded-full p-3 shadow-xl hover:bg-red-700 transition-colors"
                         aria-label="Add to cart"
                       >
                         <ShoppingCart className="w-5 h-5" />
@@ -261,10 +260,14 @@ export default function FeaturedProducts() {
                   </div>
 
                   <CardContent className="p-6">
-                    {/* Brand & Category */}
-                    <div className="flex justify-between items-center mb-2">
-                      <p className="text-xs text-red-600 font-bold">{product.brand}</p>
-                      <p className="text-xs text-gray-400">{product.ageRange}</p>
+                    {/* Brand & Age */}
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full">
+                        {product.brand}
+                      </span>
+                      <span className="text-xs text-gray-500 font-medium">
+                        {product.ageRange}
+                      </span>
                     </div>
                     
                     {/* Product Name */}
@@ -275,12 +278,12 @@ export default function FeaturedProducts() {
                     </Link>
 
                     {/* Description */}
-                    <p className="text-sm text-gray-600 mb-3 line-clamp-2">
+                    <p className="text-sm text-gray-600 mb-4 line-clamp-2 leading-relaxed">
                       {product.description}
                     </p>
 
                     {/* Rating */}
-                    <div className="flex items-center space-x-1 mb-4">
+                    <div className="flex items-center space-x-2 mb-4">
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
                           <Star
@@ -327,7 +330,7 @@ export default function FeaturedProducts() {
           ))}
         </div>
 
-        {/* View All Button */}
+        {/* View All Button - Hamleys Style */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -337,9 +340,10 @@ export default function FeaturedProducts() {
           <Link href="/products">
             <Button
               size="lg"
-              className="bg-gray-900 hover:bg-black text-white font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105"
+              className="bg-gray-900 hover:bg-black text-white font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 inline-flex items-center space-x-2"
             >
-              VIEW ALL PRODUCTS
+              <span>VIEW ALL PRODUCTS</span>
+              <ArrowRight className="w-5 h-5" />
             </Button>
           </Link>
         </motion.div>
