@@ -40,7 +40,6 @@ export default function Navbar() {
   const { itemCount } = useCart();
   const { user } = useAuth();
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
-  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
