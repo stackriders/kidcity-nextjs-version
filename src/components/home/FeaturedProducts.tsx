@@ -265,7 +265,7 @@ export default function FeaturedProducts() {
                       <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full">
                         {product.brand}
                       </span>
-                      className="absolute bottom-2 right-2 md:bottom-3 md:right-3 bg-red-600 text-white rounded-full p-2 md:p-3 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg hover:bg-red-700"
+                      <span className="text-xs text-gray-500 font-medium">
                         {product.ageRange}
                       </span>
                     </div>
@@ -317,7 +317,7 @@ export default function FeaturedProducts() {
 
                     {/* Add to Cart Button */}
                     <Button
-                      <p className="text-xs text-orange-600 mb-2 md:mb-3 font-medium">
+                      onClick={() => handleAddToCart(product)}
                       className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 md:py-3 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
                       disabled={!product.inStock}
                     >
