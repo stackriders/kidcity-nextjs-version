@@ -122,7 +122,7 @@ export default function CategoryGrid() {
         </motion.div>
 
         {/* Categories Grid - Hamleys Style */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
@@ -136,7 +136,7 @@ export default function CategoryGrid() {
               <Link href={`/category/${category.slug}`}>
                 <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white">
                   {/* Background Image */}
-                  <div className="relative h-40 md:h-48">
+                  <div className="relative h-32 sm:h-40 md:h-48">
                     <Image
                       src={category.image}
                       alt={category.name}
@@ -151,12 +151,12 @@ export default function CategoryGrid() {
                   </div>
 
                   {/* Content */}
-                  <div className="relative z-10 p-4 text-center bg-white">
-                    <div className="text-3xl mb-2">{category.icon}</div>
-                    <h3 className="font-bold text-gray-900 text-sm mb-1 group-hover:text-red-600 transition-colors duration-200 leading-tight">
+                  <div className="relative z-10 p-3 md:p-4 text-center bg-white">
+                    <div className="text-2xl md:text-3xl mb-2">{category.icon}</div>
+                    <h3 className="font-bold text-gray-900 text-xs md:text-sm mb-1 group-hover:text-red-600 transition-colors duration-200 leading-tight">
                       {category.name}
                     </h3>
-                    <p className="text-gray-500 text-xs mb-3">
+                    <p className="text-gray-500 text-xs mb-2 md:mb-3">
                       {category.productCount}+ products
                     </p>
                     
@@ -168,7 +168,7 @@ export default function CategoryGrid() {
                   </div>
 
                   {/* Floating Action */}
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <ArrowRight className="w-4 h-4 text-red-600" />
                   </div>
                 </div>

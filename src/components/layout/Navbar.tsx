@@ -71,10 +71,10 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo - Hamleys Style */}
             <Link href="/" className="flex items-center">
-              <div className="text-4xl font-black text-red-600 tracking-tight">
+              <div className="text-2xl md:text-4xl font-black text-red-600 tracking-tight">
                 Hamleys
               </div>
-              <div className="ml-2 text-xs text-gray-500 font-medium">
+              <div className="ml-2 text-xs text-gray-500 font-medium hidden sm:block">
                 EST. 1760
               </div>
             </Link>
@@ -170,14 +170,14 @@ export default function Navbar() {
                   placeholder="Search toys, games & more..."
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 pr-4 py-2.5 rounded-full border-2 border-gray-300 focus:border-red-500 focus:ring-0 transition-colors text-sm bg-gray-50 focus:bg-white"
+                  className="w-full pl-12 pr-4 py-2.5 rounded-full border-2 border-gray-300 focus:border-red-500 focus:ring-0 transition-colors text-sm bg-gray-50 focus:bg-white"
                 />
                 <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
               </div>
             </div>
 
             {/* Right Side Icons */}
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2 md:space-x-3">
               {/* Mobile Search */}
               <Button
                 variant="ghost"

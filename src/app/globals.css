@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Import Inter font */
+/* Import Inter font with proper display */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
 @layer base {
@@ -59,21 +59,32 @@
   body {
     @apply bg-background text-foreground;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
-    font-variation-settings: normal;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.5;
   }
 }
 
-/* Smooth scrolling */
+/* Global styles */
 html {
   scroll-behavior: smooth;
+  height: 100%;
 }
 
-/* Optimize font loading */
 body {
-  font-display: swap !important;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Reset and normalize */
+* {
+  box-sizing: border-box;
+}
+
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 /* Custom scrollbar */
@@ -92,6 +103,49 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #b91c1c;
+}
+
+/* Container improvements */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
 }
 
 /* Line clamp utility */
@@ -116,62 +170,50 @@ body {
   overflow: hidden;
 }
 
-/* Loading spinner */
-.spinner {
-  border: 2px solid #f3f3f3;
-  border-top: 2px solid #dc2626;
-  border-radius: 50%;
-  width: 20px;
-  height: 20px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
 /* Focus styles for accessibility */
-.focus-ring,
 button:focus-visible,
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
-  @apply focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
+  outline: 2px solid #dc2626;
+  outline-offset: 2px;
 }
 
-/* Responsive text sizes */
-@media (max-width: 640px) {
-  .text-responsive-xl {
-    font-size: 1.5rem;
-    line-height: 2rem;
-  }
+/* Button and form elements */
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
 }
 
-@media (min-width: 641px) {
-  .text-responsive-xl {
-    font-size: 2rem;
-    line-height: 2.5rem;
-  }
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
 }
 
-/* Image lazy loading optimization */
-img[loading="lazy"] {
-  opacity: 0;
-  transition: opacity 0.3s ease-in-out;
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
 }
 
-img[loading="lazy"].loaded {
-  opacity: 1;
+/* Links */
+a {
+  color: inherit;
+  text-decoration: none;
 }
 
-/* Ensure images don't break layout */
+/* Images */
 img {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
-/* Hover effects for product cards */
+/* Product card hover effects */
 .product-card {
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -181,90 +223,16 @@ img {
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
-/* Hamleys specific styles */
-.hamleys-gradient {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-}
-
-.hamleys-shadow {
-  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.15);
-}
-
-.hamleys-shadow-lg {
-  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.2);
-}
-
-/* Custom animations for Hamleys */
-@keyframes hamleys-bounce {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
-.hamleys-bounce {
-  animation: hamleys-bounce 2s ease-in-out infinite;
-}
-
-/* Improved button styles */
-.hamleys-button {
-  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.hamleys-button:hover {
-  background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
-}
-
-/* Fix any layout issues */
-* {
-  box-sizing: border-box;
-}
-
-/* Ensure proper text rendering */
-body, input, textarea, select, button {
+/* Text rendering */
+body,
+input,
+textarea,
+select,
+button {
   text-rendering: optimizeLegibility;
 }
 
-/* Fix potential z-index issues */
-.fixed {
-  z-index: 50;
-}
-
-.sticky {
-  z-index: 40;
-}
-
-/* Ensure proper button styling */
-button {
-  cursor: pointer;
-  border: none;
-  background: transparent;
-  font-family: inherit;
-}
-
-button:disabled {
-  cursor: not-allowed;
-  opacity: 0.6;
-}
-
-/* Fix input styling */
-input, textarea, select {
-  font-family: inherit;
-  font-size: inherit;
-}
-
-/* Ensure proper link styling */
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* Fix any flexbox issues */
+/* Layout utilities */
 .flex {
   display: flex;
 }
@@ -273,41 +241,15 @@ a {
   display: grid;
 }
 
-/* Ensure proper spacing */
-.container {
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  padding-left: 1rem;
-  padding-right: 1rem;
-}
-
-@media (min-width: 640px) {
-  .container {
-    max-width: 640px;
-  }
-}
-
-@media (min-width: 768px) {
-  .container {
-    max-width: 768px;
-  }
-}
-
-@media (min-width: 1024px) {
-  .container {
-    max-width: 1024px;
-  }
-}
-
-@media (min-width: 1280px) {
-  .container {
-    max-width: 1280px;
-  }
-}
-
-@media (min-width: 1536px) {
-  .container {
-    max-width: 1536px;
-  }
+/* Utility classes */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
