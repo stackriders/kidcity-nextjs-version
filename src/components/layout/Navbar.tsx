@@ -10,7 +10,6 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import CartDrawer from './CartDrawer';
-import CartDrawer from './CartDrawer';
 
 const categories = [
   { name: 'Action Figures & Collectibles', href: '/category/action-figures' },
