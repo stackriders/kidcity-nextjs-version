@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Search, ShoppingCart, User, Menu, Heart, MapPin, Phone, ChevronDown, Gift } from 'lucide-react';
+import { Search, ShoppingCart, User, Menu, Heart, MapPin, Phone, ChevronDown, Gift, LogOut, Package } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
@@ -39,7 +39,16 @@ export default function Navbar() {
   const [showAgeMenu, setShowAgeMenu] = useState(false);
   const { itemCount } = useCart();
   const { user } = useAuth();
+  const { logout } = useAuth();
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
@@ -223,11 +232,58 @@ export default function Navbar() {
               </Button>
 
               {/* User Account */}
-              <Link href={user ? "/account" : "/auth"}>
-                <Button variant="ghost" size="icon" className="hover:bg-gray-100">
-                  <User className="w-5 h-5 text-gray-700" />
-                </Button>
-              </Link>
+              {user ? (
+                <div className="relative group">
+                  <Button variant="ghost" size="icon" className="hover:bg-gray-100">
+                    {user.photoURL ? (
+                      <img
+                        src={user.photoURL}
+                        alt="Profile"
+                        className="w-6 h-6 rounded-full object-cover"
+                      />
+                    ) : (
+                      <User className="w-5 h-5 text-gray-700" />
+                    )}
+                  </Button>
+                  
+                  {/* User Dropdown */}
+                  <div className="absolute right-0 top-full mt-2 w-48 bg-white shadow-xl rounded-lg border border-gray-100 py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                    <div className="px-4 py-2 border-b border-gray-100">
+                      <p className="font-medium text-gray-900 truncate">
+                        {user.displayName || 'User'}
+                      </p>
+                      <p className="text-sm text-gray-600 truncate">{user.email}</p>
+                    </div>
+                    <Link
+                      href="/profile"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      <User className="w-4 h-4 mr-2" />
+                      My Profile
+                    </Link>
+                    <Link
+                      href="/orders"
+                      className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                    >
+                      <Package className="w-4 h-4 mr-2" />
+                      My Orders
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors"
+                    >
+                      <LogOut className="w-4 h-4 mr-2" />
+                      Logout
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <Link href="/auth">
+                  <Button variant="ghost" className="hover:bg-gray-100 text-sm font-medium">
+                    Login / Register
+                  </Button>
+                </Link>
+              )}
 
               {/* Mobile Menu */}
               <Sheet>

@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
+import ProtectedRoute from '@/components/auth/ProtectedRoute';
 import { motion } from 'framer-motion';
 import { CreditCard, Truck, Shield, MapPin, User, Phone, Mail, Lock } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -156,17 +157,18 @@ export default function CheckoutPageClient() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-8">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
-            Checkout
-          </h1>
-          <p className="text-gray-600">
-            Complete your order securely
-          </p>
-        </div>
+    <ProtectedRoute>
+      <div className="min-h-screen bg-gray-50">
+        <div className="container mx-auto px-4 py-8">
+          {/* Header */}
+          <div className="mb-8">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">
+              Checkout
+            </h1>
+            <p className="text-gray-600">
+              Complete your order securely
+            </p>
+          </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           {/* Checkout Form */}
@@ -397,8 +399,9 @@ export default function CheckoutPageClient() {
         </div>
       </div>
 
-      {/* Razorpay Script */}
-      <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    </div>
+        {/* Razorpay Script */}
+        <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+      </div>
+    </ProtectedRoute>
   );
 }
