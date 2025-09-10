@@ -99,8 +99,8 @@ export default function CheckoutPageClient() {
         tax,
         total: finalTotal,
         paymentMethod,
-        paymentStatus: 'pending',
-        orderStatus: 'processing',
+        paymentStatus: 'pending' as const,
+        orderStatus: 'processing' as const,
         createdAt: new Date()
       };
 
@@ -138,8 +138,7 @@ export default function CheckoutPageClient() {
         const razorpay = new (window as any).Razorpay(options);
         razorpay.open();
       } else {
-        // Handle other payment methods (Stripe, etc.)
-        // For demo, we'll simulate success
+        // Handle COD
         setTimeout(() => {
           clearCart();
           router.push(`/order-confirmation?orderId=${orderId}`);

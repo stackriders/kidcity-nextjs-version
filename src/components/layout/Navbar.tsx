@@ -10,6 +10,7 @@ import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/co
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 import CartDrawer from './CartDrawer';
+import CartDrawer from './CartDrawer';
 
 const categories = [
   { name: 'Action Figures & Collectibles', href: '/category/action-figures' },
@@ -39,6 +40,7 @@ export default function Navbar() {
   const [showAgeMenu, setShowAgeMenu] = useState(false);
   const { itemCount } = useCart();
   const { user } = useAuth();
+  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
   const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
   return (
@@ -205,6 +207,11 @@ export default function Navbar() {
                 className="relative hover:bg-gray-100"
                 onClick={() => setIsCartDrawerOpen(true)}
               >
+                variant="ghost" 
+                size="icon" 
+                className="relative hover:bg-gray-100"
+                onClick={() => setIsCartDrawerOpen(true)}
+              >
                 <ShoppingCart className="w-5 h-5 text-gray-700" />
                 {itemCount > 0 && (
                   <motion.span
@@ -298,6 +305,12 @@ export default function Navbar() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer 
+        isOpen={isCartDrawerOpen} 
+        onClose={() => setIsCartDrawerOpen(false)} 
+      />
 
       {/* Cart Drawer */}
       <CartDrawer 
