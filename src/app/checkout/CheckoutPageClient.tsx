@@ -397,45 +397,11 @@ export default function CheckoutPageClient() {
                 </CardContent>
               </Card>
             </div>
-              Complete your order securely
-            </p>
-      </div>
+          </div>
+        </div>
         {/* Razorpay Script */}
         <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
       </div>
     </ProtectedRoute>
-            <div className="lg:col-span-2 space-y-8">
-              {/* Shipping Address */}
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center">
-                    <Truck className="w-5 h-5 mr-2 text-red-600" />
-                    Shipping Address
-                  </CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Full Name *
-                      </label>
-                      <Input
-                        value={shippingAddress.fullName}
-                        onChange={(e) => handleInputChange('fullName', e.target.value)}
-                        placeholder="Enter your full name"
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Email *
-                      </label>
-                      <Input
-                        type="email"
-                        value={shippingAddress.email}
-                        onChange={(e) => handleInputChange('email', e.target.value)}
-                        placeholder="Enter your email"
-                        required
-                      />
-                    </div>
-                  </div>
+  );
+}
