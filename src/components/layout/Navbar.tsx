@@ -9,6 +9,7 @@ import { Input } from '@/components/ui/input';
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
+import CartDrawer from './CartDrawer';
 
 const categories = [
   { name: 'Action Figures & Collectibles', href: '/category/action-figures' },
@@ -38,6 +39,7 @@ export default function Navbar() {
   const [showAgeMenu, setShowAgeMenu] = useState(false);
   const { itemCount } = useCart();
   const { user } = useAuth();
+  const [isCartDrawerOpen, setIsCartDrawerOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
@@ -197,20 +199,23 @@ export default function Navbar() {
               </Button>
 
               {/* Cart */}
-              <Link href="/cart">
-                <Button variant="ghost" size="icon" className="relative hover:bg-gray-100">
-                  <ShoppingCart className="w-5 h-5 text-gray-700" />
-                  {itemCount > 0 && (
-                    <motion.span
-                      initial={{ scale: 0 }}
-                      animate={{ scale: 1 }}
-                      className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold text-[10px]"
-                    >
-                      {itemCount}
-                    </motion.span>
-                  )}
-                </Button>
-              </Link>
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                className="relative hover:bg-gray-100"
+                onClick={() => setIsCartDrawerOpen(true)}
+              >
+                <ShoppingCart className="w-5 h-5 text-gray-700" />
+                {itemCount > 0 && (
+                  <motion.span
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    className="absolute -top-1 -right-1 bg-red-600 text-white text-xs rounded-full w-4 h-4 flex items-center justify-center font-bold text-[10px]"
+                  >
+                    {itemCount}
+                  </motion.span>
+                )}
+              </Button>
 
               {/* User Account */}
               <Link href={user ? "/account" : "/auth"}>
@@ -293,6 +298,12 @@ export default function Navbar() {
           </AnimatePresence>
         </div>
       </div>
+
+      {/* Cart Drawer */}
+      <CartDrawer 
+        isOpen={isCartDrawerOpen} 
+        onClose={() => setIsCartDrawerOpen(false)} 
+      />
     </header>
   );
 }
