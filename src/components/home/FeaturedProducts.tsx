@@ -2,133 +2,57 @@
 
 import React from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { Star, Heart, ShoppingCart, Eye, Zap, ArrowRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
 
 const featuredProducts = [
   {
     id: '1',
-    name: 'LEGO Creator 3-in-1 Deep Sea Creatures',
-    description: 'Build a shark, squid, or angler fish with this amazing 3-in-1 set',
-    price: 2499,
-    originalPrice: 2999,
+    name: 'Super Hero Action Figure',
+    price: 1299,
+    originalPrice: 1599,
     image: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Building & Construction',
-    rating: 4.8,
-    reviews: 124,
-    inStock: true,
-    badge: 'Best Seller',
-    ageRange: '7+ years',
-    brand: 'LEGO'
+    badge: 'Best Seller'
   },
   {
     id: '2',
-    name: 'Barbie Dreamhouse Adventures Playset',
-    description: 'Three floors of fun with working elevator and pool slide',
-    price: 8999,
-    originalPrice: 10999,
+    name: 'Educational Building Set',
+    price: 899,
+    originalPrice: 1199,
     image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Dolls & Dollhouses',
-    rating: 4.9,
-    reviews: 89,
-    inStock: true,
-    badge: 'New Arrival',
-    ageRange: '3+ years',
-    brand: 'Barbie'
+    badge: 'New'
   },
   {
     id: '3',
-    name: 'Hot Wheels Ultimate Garage Playset',
-    description: 'Multi-level garage with car wash, gas station and more',
-    price: 5499,
-    originalPrice: 6499,
-    image: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Vehicles & Remote Control',
-    rating: 4.7,
-    reviews: 156,
-    inStock: true,
-    badge: 'Popular',
-    ageRange: '4+ years',
-    brand: 'Hot Wheels'
+    name: 'Princess Doll Collection',
+    price: 2199,
+    originalPrice: 2799,
+    image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400',
+    badge: 'Popular'
   },
   {
     id: '4',
-    name: 'Nerf Elite 2.0 Commander Blaster',
-    description: 'Motorized blaster with 6-dart rotating drum',
-    price: 3299,
-    originalPrice: 3999,
-    image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Action Figures & Collectibles',
-    rating: 4.6,
-    reviews: 203,
-    inStock: true,
-    badge: 'Sale',
-    ageRange: '8+ years',
-    brand: 'Nerf'
+    name: 'Remote Control Car',
+    price: 3499,
+    originalPrice: 4299,
+    image: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=400',
+    badge: 'Sale'
   },
   {
     id: '5',
-    name: 'Crayola Light-Up Tracing Pad',
-    description: 'LED light pad for tracing and drawing activities',
-    price: 1899,
-    originalPrice: 2299,
-    image: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Arts, Crafts & DIY',
-    rating: 4.8,
-    reviews: 67,
-    inStock: true,
-    badge: 'Creative',
-    ageRange: '6+ years',
-    brand: 'Crayola'
+    name: 'Art & Craft Kit',
+    price: 1599,
+    originalPrice: 1999,
+    image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400',
+    badge: 'Creative'
   },
   {
     id: '6',
-    name: 'Ravensburger 1000pc Puzzle Collection',
-    description: 'Premium quality jigsaw puzzle with vibrant artwork',
-    price: 1299,
-    originalPrice: 1599,
-    image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Games & Puzzles',
-    rating: 4.5,
-    reviews: 91,
-    inStock: true,
-    badge: 'Brain Teaser',
-    ageRange: '12+ years',
-    brand: 'Ravensburger'
-  },
-  {
-    id: '7',
-    name: 'LeapFrog Learning Friends 100 Words Book',
-    description: 'Interactive book that teaches first words in English and Spanish',
-    price: 2199,
-    originalPrice: 2599,
+    name: 'Puzzle Adventure',
+    price: 799,
+    originalPrice: 999,
     image: 'https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Learning & Education',
-    rating: 4.9,
-    reviews: 45,
-    inStock: true,
-    badge: 'Educational',
-    ageRange: '18m+ years',
-    brand: 'LeapFrog'
-  },
-  {
-    id: '8',
-    name: 'Pogo Stick for Kids with Foam Handles',
-    description: 'Safe pogo stick with comfortable foam grips',
-    price: 2799,
-    originalPrice: 3299,
-    image: 'https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=400',
-    category: 'Outdoor & Sports',
-    rating: 4.4,
-    reviews: 78,
-    inStock: false,
-    badge: 'Active Play',
-    ageRange: '5+ years',
-    brand: 'Flybar'
+    badge: 'Brain Teaser'
   }
 ];
 
@@ -146,38 +70,26 @@ export default function FeaturedProducts() {
 
   const badgeColors = {
     'Best Seller': 'bg-red-600',
-    'New Arrival': 'bg-green-500',
+    'New': 'bg-green-500',
     'Popular': 'bg-blue-500',
     'Sale': 'bg-orange-500',
     'Creative': 'bg-purple-500',
-    'Educational': 'bg-teal-500',
-    'Brain Teaser': 'bg-yellow-600',
-    'Active Play': 'bg-pink-500'
+    'Brain Teaser': 'bg-yellow-600'
   };
 
   return (
-    <section className="py-16 bg-white">
-      <div className="container mx-auto px-4">
-        {/* Section Header - Hamleys Style */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-4">
-            <Zap className="w-8 h-8 text-red-600" />
-          </div>
-          <h2 className="text-3xl md:text-4xl font-black text-gray-900 mb-4 tracking-tight">
-            FEATURED PRODUCTS
+    <section className="py-12 bg-gray-50">
+      <div className="max-w-7xl mx-auto px-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 font-['Poppins']">
+            Featured Products
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our most popular toys and games, loved by children and parents worldwide
+          <p className="text-lg text-gray-600 font-medium">
+            Discover our most popular toys loved by children worldwide
           </p>
-        </motion.div>
+        </div>
 
-        {/* Products Grid - Hamleys Style */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-6">
           {featuredProducts.map((product, index) => (
             <motion.div
               key={product.id}
@@ -185,168 +97,57 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -12 }}
               className="group"
             >
-              <Card className="overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white rounded-3xl h-full">
+              <div className="rounded-2xl shadow-md hover:shadow-xl transition hover:scale-105 bg-white overflow-hidden">
                 <div className="relative">
-                  {/* Product Image */}
-                  <Link href={`/product/${product.id}`}>
-                    <div className="relative h-52 md:h-72 overflow-hidden bg-gray-50 cursor-pointer rounded-t-3xl">
-                      <Image
-                        src={product.image}
-                        alt={product.name}
-                        fill
-                        className="object-cover group-hover:scale-115 transition-transform duration-700"
-                        loading="lazy"
-                      />
-                      
-                      {/* Badge */}
-                      {product.badge && (
-                        <div className={`absolute top-3 left-3 md:top-4 md:left-4 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold shadow-lg`}>
-                          {product.badge}
-                        </div>
-                      )}
-
-                      {/* Stock Status */}
-                      {!product.inStock && (
-                        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                          <span className="bg-red-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base font-bold shadow-lg">
-                            Out of Stock
-                          </span>
-                        </div>
-                      )}
-
-                      {/* Discount Badge */}
-                      {product.originalPrice > product.price && (
-                        <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 bg-green-600 text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
-                          {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-
-                  {/* Quick Actions - Hamleys Style */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-2 md:space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-500">
-                    <motion.button
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="bg-white/95 backdrop-blur-sm rounded-full p-3 md:p-4 shadow-xl hover:bg-white transition-colors"
-                      aria-label="Add to wishlist"
-                    >
-                      <Heart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 hover:text-red-600 transition-colors" />
-                    </motion.button>
-                    <Link href={`/product/${product.id}`}>
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        className="bg-white/95 backdrop-blur-sm rounded-full p-3 md:p-4 shadow-xl hover:bg-white transition-colors"
-                        aria-label="Quick view"
-                      >
-                        <Eye className="w-5 h-5 md:w-6 md:h-6 text-gray-700 hover:text-blue-600 transition-colors" />
-                      </motion.button>
-                    </Link>
-                    {product.inStock && (
-                      <motion.button
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={() => handleAddToCart(product)}
-                        className="bg-red-600 text-white rounded-full p-3 md:p-4 shadow-xl hover:bg-red-700 transition-colors"
-                        aria-label="Add to cart"
-                      >
-                        <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
-                      </motion.button>
+                  <div className="relative h-48 overflow-hidden rounded-xl">
+                    <Image
+                      src={product.image}
+                      alt={product.name}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                    {product.badge && (
+                      <div className={`absolute top-2 left-2 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-2 py-1 rounded-full text-xs font-bold`}>
+                        {product.badge}
+                      </div>
+                    )}
+                    {product.originalPrice > product.price && (
+                      <div className="absolute top-2 right-2 bg-green-600 text-white px-2 py-1 rounded-full text-xs font-bold">
+                        {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
+                      </div>
                     )}
                   </div>
-
-                  <CardContent className="p-5 md:p-7">
-                    {/* Brand & Age */}
-                    <div className="flex justify-between items-center mb-3 md:mb-4">
-                      <span className="text-xs md:text-sm font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full">
-                        {product.brand}
-                      </span>
-                      <span className="text-xs md:text-sm text-gray-500 font-medium">
-                        {product.ageRange}
-                      </span>
-                    </div>
+                  
+                  <div className="p-4">
+                    <h3 className="font-bold text-gray-900 mb-2 line-clamp-2 font-['Poppins']">
+                      {product.name}
+                    </h3>
                     
-                    {/* Product Name */}
-                    <Link href={`/product/${product.id}`}>
-                      <h3 className="font-bold text-lg md:text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-red-600 transition-colors cursor-pointer leading-tight">
-                        {product.name}
-                      </h3>
-                    </Link>
-
-                    {/* Description */}
-                    <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-5 line-clamp-2 leading-relaxed">
-                      {product.description}
-                    </p>
-
-                    {/* Rating */}
-                    <div className="flex items-center space-x-2 md:space-x-3 mb-4 md:mb-5">
-                      <div className="flex">
-                        {[...Array(5)].map((_, i) => (
-                          <Star
-                            key={i}
-                            className={`w-4 h-4 md:w-5 md:h-5 ${
-                              i < Math.floor(product.rating)
-                                ? 'text-yellow-400 fill-current'
-                                : 'text-gray-300'
-                            }`}
-                          />
-                        ))}
-                      </div>
-                      <span className="text-sm md:text-base text-gray-600 font-medium">
-                        {product.rating} ({product.reviews})
+                    <div className="flex items-center space-x-2 mb-3">
+                      <span className="text-xl font-bold text-red-600">
+                        ₹{product.price.toLocaleString()}
                       </span>
-                    </div>
-
-                    {/* Price */}
-                    <div className="flex items-center justify-between mb-4 md:mb-6">
-                      <div className="flex items-center space-x-3">
-                        <span className="text-xl md:text-3xl font-black text-red-600">
-                          ₹{product.price.toLocaleString()}
+                      {product.originalPrice > product.price && (
+                        <span className="text-sm text-gray-500 line-through">
+                          ₹{product.originalPrice.toLocaleString()}
                         </span>
-                        {product.originalPrice > product.price && (
-                          <span className="text-sm md:text-base text-gray-500 line-through">
-                            ₹{product.originalPrice.toLocaleString()}
-                          </span>
-                        )}
-                      </div>
+                      )}
                     </div>
 
-                    {/* Add to Cart Button */}
-                    <Button
+                    <button
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-base md:text-lg"
-                      disabled={!product.inStock}
+                      className="w-full rounded-full px-6 py-3 bg-red-600 text-white shadow-md hover:bg-red-700 transition font-medium"
                     >
-                      {product.inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
-                    </Button>
-                  </CardContent>
+                      Add to Cart
+                    </button>
+                  </div>
                 </div>
-              </Card>
+              </div>
             </motion.div>
           ))}
         </div>
-
-        {/* View All Button - Hamleys Style */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mt-12"
-        >
-          <Link href="/products">
-            <Button
-              size="lg"
-              className="bg-gray-900 hover:bg-black text-white font-bold px-10 py-4 rounded-full text-lg shadow-lg hover:shadow-xl transition-all duration-200 transform hover:scale-105 inline-flex items-center space-x-2"
-            >
-              <span>VIEW ALL PRODUCTS</span>
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

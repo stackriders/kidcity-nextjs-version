@@ -3,39 +3,32 @@
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const heroSlides = [
   {
     id: 1,
-    title: "The World's Oldest Toy Store",
-    subtitle: "Welcome to Hamleys",
-    description: "Discover the magic of play with our incredible collection of toys, games and gifts for every age.",
+    title: "Discover Amazing Toys",
+    subtitle: "Where Fun Begins",
+    description: "Explore our incredible collection of toys that spark imagination and create lasting memories.",
     image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    cta: "Shop Now",
-    badge: "Since 1760",
-    color: "from-red-600 via-red-700 to-red-800"
+    cta: "Shop Now"
   },
   {
     id: 2,
-    title: "New Arrivals Just Landed",
-    subtitle: "Fresh & Exciting",
-    description: "Be the first to discover our latest collection of amazing toys and games from top brands.",
+    title: "Educational & Fun",
+    subtitle: "Learn Through Play",
+    description: "Discover toys that combine learning with fun, perfect for growing minds.",
     image: "https://images.pexels.com/photos/163036/mario-luigi-yoschi-figures-163036.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    cta: "Explore New",
-    badge: "New Collection",
-    color: "from-blue-600 via-purple-600 to-pink-600"
+    cta: "Explore Collection"
   },
   {
     id: 3,
-    title: "Mega Sale Up to 50% Off",
-    subtitle: "Limited Time Offer",
-    description: "Don't miss out on incredible savings across thousands of toys and games.",
+    title: "Special Offers",
+    subtitle: "Save Big Today",
+    description: "Don't miss out on incredible deals across our entire toy collection.",
     image: "https://images.pexels.com/photos/1148998/pexels-photo-1148998.jpeg?auto=compress&cs=tinysrgb&w=1200",
-    cta: "Shop Sale",
-    badge: "Save Big",
-    color: "from-orange-500 via-red-500 to-pink-500"
+    cta: "Shop Sale"
   }
 ];
 
@@ -59,112 +52,49 @@ export default function HeroBanner() {
   };
 
   return (
-    <section className="relative h-[450px] md:h-[550px] lg:h-[650px] overflow-hidden bg-gray-900">
+    <section className="relative w-full h-[500px] md:h-[600px] overflow-hidden">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
-          initial={{ opacity: 0, scale: 1.1 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0.9 }}
-          transition={{ duration: 0.7, ease: "easeInOut" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
           className="absolute inset-0"
         >
-          {/* Background Image */}
-          <div className="absolute inset-0">
+          <div className="relative w-full h-full rounded-xl overflow-hidden">
             <Image
               src={heroSlides[currentSlide].image}
               alt={heroSlides[currentSlide].title}
               fill
               className="object-cover"
-              priority={currentSlide === 0}
+              priority
             />
-            <div className={`absolute inset-0 bg-gradient-to-r ${heroSlides[currentSlide].color} opacity-80`} />
-          </div>
-
-          {/* Content */}
-          <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center lg:justify-start">
-            <div className="w-full max-w-3xl text-white text-center lg:text-left">
-              <motion.div
-                initial={{ opacity: 0, y: 60 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2, duration: 0.8 }}
-                className="space-y-6 md:space-y-8"
-              >
-                {/* Badge */}
-                <motion.div
-                  initial={{ scale: 0, rotate: -10 }}
-                  animate={{ scale: 1, rotate: 0 }}
-                  transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                  className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 md:px-6 md:py-3 border border-white/30"
-                >
-                  <Star className="w-4 h-4 mr-2 text-yellow-300" />
-                  <span className="text-sm md:text-base font-bold tracking-wide">{heroSlides[currentSlide].badge}</span>
-                </motion.div>
-
-                {/* Subtitle */}
-                <motion.h2
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3, duration: 0.8 }}
-                  className="text-lg md:text-xl lg:text-2xl font-bold tracking-wide opacity-90"
-                >
-                  {heroSlides[currentSlide].subtitle}
-                </motion.h2>
-
-                {/* Main Title */}
-                <motion.h1
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.4, duration: 0.8 }}
-                  className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight tracking-tight"
-                >
-                  {heroSlides[currentSlide].title}
-                </motion.h1>
-
-                {/* Description */}
-                <motion.p
-                  initial={{ opacity: 0, x: -30 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5, duration: 0.8 }}
-                  className="text-base md:text-lg lg:text-xl opacity-95 max-w-2xl leading-relaxed"
-                >
-                  {heroSlides[currentSlide].description}
-                </motion.p>
-
-                {/* CTA Button */}
+            <div className="absolute inset-0 bg-black bg-opacity-40" />
+            
+            {/* Content */}
+            <div className="absolute inset-0 flex items-center justify-center">
+              <div className="max-w-7xl mx-auto px-6 text-center text-white">
                 <motion.div
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.6, duration: 0.8 }}
-                  className="pt-4 md:pt-6"
+                  transition={{ delay: 0.2, duration: 0.6 }}
                 >
-                  <Button
-                    size="lg"
-                    className="bg-white text-red-600 hover:bg-red-50 font-black px-8 py-4 md:px-12 md:py-5 rounded-full text-lg md:text-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
-                  >
+                  <p className="text-lg md:text-xl font-medium mb-2 text-yellow-400">
+                    {heroSlides[currentSlide].subtitle}
+                  </p>
+                  <h1 className="text-4xl md:text-6xl font-bold mb-4 font-['Poppins']">
+                    {heroSlides[currentSlide].title}
+                  </h1>
+                  <p className="text-lg md:text-xl mb-8 max-w-2xl mx-auto font-medium">
+                    {heroSlides[currentSlide].description}
+                  </p>
+                  <button className="rounded-full px-6 py-3 bg-red-600 text-white shadow-md hover:bg-red-700 transition font-medium">
                     {heroSlides[currentSlide].cta}
-                  </Button>
+                  </button>
                 </motion.div>
-              </motion.div>
-            </div>
-
-            {/* Right Side Stats - Hamleys Style */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.8, duration: 0.8 }}
-              className="hidden xl:block absolute top-12 right-12 text-white text-right"
-            >
-              <div className="bg-white/15 backdrop-blur-sm rounded-3xl p-6 lg:p-8 border border-white/30 shadow-2xl">
-                <div className="text-sm font-bold mb-3 opacity-90 tracking-wide">TRUSTED SINCE</div>
-                <div className="text-4xl lg:text-6xl font-black mb-2 text-yellow-300">1760</div>
-                <div className="text-sm opacity-80 mb-6 font-medium">260+ YEARS OF JOY</div>
-                <div className="border-t border-white/30 pt-6">
-                  <div className="text-2xl lg:text-3xl font-bold mb-1">50M+</div>
-                  <div className="text-sm opacity-80 font-medium">Happy Customers</div>
-                </div>
               </div>
-            </motion.div>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>
@@ -172,37 +102,29 @@ export default function HeroBanner() {
       {/* Navigation Arrows */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 md:left-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-200 group"
-        aria-label="Previous slide"
+        className="absolute left-4 top-1/2 transform -translate-y-1/2 z-20 bg-white bg-opacity-20 backdrop-blur-sm hover:bg-opacity-30 rounded-full p-3 transition-all duration-200"
       >
-        <ChevronLeft className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        <ChevronLeft className="w-6 h-6 text-white" />
       </button>
       <button
         onClick={nextSlide}
-        className="absolute right-4 md:right-8 top-1/2 transform -translate-y-1/2 z-20 bg-white/20 backdrop-blur-sm hover:bg-white/30 rounded-full p-3 transition-all duration-200 group"
-        aria-label="Next slide"
+        className="absolute right-4 top-1/2 transform -translate-y-1/2 z-20 bg-white bg-opacity-20 backdrop-blur-sm hover:bg-opacity-30 rounded-full p-3 transition-all duration-200"
       >
-        <ChevronRight className="w-6 h-6 text-white group-hover:scale-110 transition-transform" />
+        <ChevronRight className="w-6 h-6 text-white" />
       </button>
 
       {/* Slide Indicators */}
-      <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-3">
+      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2">
         {heroSlides.map((_, index) => (
           <button
             key={index}
             onClick={() => setCurrentSlide(index)}
             className={`w-3 h-3 rounded-full transition-all duration-300 ${
-              index === currentSlide 
-                ? 'bg-white scale-125 shadow-lg' 
-                : 'bg-white/50 hover:bg-white/75'
+              index === currentSlide ? 'bg-white' : 'bg-white bg-opacity-50'
             }`}
-            aria-label={`Go to slide ${index + 1}`}
           />
         ))}
       </div>
-
-      {/* Bottom Gradient Overlay */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black/30 to-transparent z-5" />
     </section>
   );
 }

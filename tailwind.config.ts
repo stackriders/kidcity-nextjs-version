@@ -100,6 +100,7 @@ const config: Config = {
       },
       fontFamily: {
         sans: [
+          'Poppins',
           'Inter',
           '-apple-system',
           'BlinkMacSystemFont',
