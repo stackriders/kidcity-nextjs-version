@@ -9,7 +9,8 @@ import {
   startAfter,
   DocumentData,
   QueryDocumentSnapshot,
-  WhereFilterOp
+  WhereFilterOp,
+  getCountFromServer
 } from 'firebase/firestore';
 
 export interface Product {
@@ -44,6 +45,15 @@ export interface ProductFilters {
   sortBy?: 'price_asc' | 'price_desc' | 'newest' | 'rating' | 'name';
 }
 
+export interface Category {
+  id: string;
+  name: string;
+  slug: string;
+  productCount: number;
+  image?: string;
+  description?: string;
+}
+
 export interface ProductsResponse {
   products: Product[];
   hasMore: boolean;
@@ -59,52 +69,62 @@ export const getProducts = async (
 ): Promise<ProductsResponse> => {
   try {
     const productsRef = collection(db, 'products');
-    let q = query(productsRef);
+    let constraints: any[] = [];
 
     // Apply filters
     if (filters.category) {
-      q = query(q, where('categorySlug', '==', filters.category));
+      constraints.push(where('categorySlug', '==', filters.category));
     }
 
     if (filters.inStock !== undefined) {
-      q = query(q, where('inStock', '==', filters.inStock));
+      constraints.push(where('inStock', '==', filters.inStock));
     }
 
     if (filters.minPrice !== undefined) {
-      q = query(q, where('price', '>=', filters.minPrice));
+      constraints.push(where('price', '>=', filters.minPrice));
     }
 
     if (filters.maxPrice !== undefined) {
-      q = query(q, where('price', '<=', filters.maxPrice));
+      constraints.push(where('price', '<=', filters.maxPrice));
     }
 
     // Apply sorting
+    let orderByField = 'createdAt';
+    let orderByDirection: 'asc' | 'desc' = 'desc';
+    
     switch (filters.sortBy) {
       case 'price_asc':
-        q = query(q, orderBy('price', 'asc'));
+        orderByField = 'price';
+        orderByDirection = 'asc';
         break;
       case 'price_desc':
-        q = query(q, orderBy('price', 'desc'));
+        orderByField = 'price';
+        orderByDirection = 'desc';
         break;
       case 'newest':
-        q = query(q, orderBy('createdAt', 'desc'));
+        orderByField = 'createdAt';
+        orderByDirection = 'desc';
         break;
       case 'rating':
-        q = query(q, orderBy('rating', 'desc'));
+        orderByField = 'rating';
+        orderByDirection = 'desc';
         break;
       case 'name':
-        q = query(q, orderBy('name', 'asc'));
+        orderByField = 'name';
+        orderByDirection = 'asc';
         break;
-      default:
-        q = query(q, orderBy('createdAt', 'desc'));
     }
+
+    constraints.push(orderBy(orderByField, orderByDirection));
 
     // Add pagination
     if (lastDoc) {
-      q = query(q, startAfter(lastDoc));
+      constraints.push(startAfter(lastDoc));
     }
 
-    q = query(q, limit(pageSize + 1)); // Get one extra to check if there are more
+    constraints.push(limit(pageSize + 1)); // Get one extra to check if there are more
+
+    const q = query(productsRef, ...constraints);
 
     const querySnapshot = await getDocs(q);
     const products: Product[] = [];
@@ -154,25 +174,40 @@ export const getProducts = async (
 };
 
 // Get product categories for filter sidebar
-export const getProductCategories = async () => {
+export const getProductCategories = async (): Promise<Category[]> => {
   try {
     const categoriesRef = collection(db, 'categories');
     const querySnapshot = await getDocs(categoriesRef);
     
-    return querySnapshot.docs.map(doc => ({
+    const categories = querySnapshot.docs.map(doc => ({
       id: doc.id,
       ...doc.data()
-    }));
+    })) as Category[];
+
+    return categories.length > 0 ? categories : getFallbackCategories();
   } catch (error) {
     console.error('Error fetching categories:', error);
-    return [];
+    return getFallbackCategories();
   }
 };
+
+// Get fallback categories
+export const getFallbackCategories = (): Category[] => [
+  { id: '1', name: 'Action Figures', slug: 'action-figures', productCount: 25 },
+  { id: '2', name: 'Dolls & Accessories', slug: 'dolls-accessories', productCount: 30 },
+  { id: '3', name: 'Building Blocks', slug: 'building-blocks', productCount: 20 },
+  { id: '4', name: 'Puzzles', slug: 'puzzles', productCount: 15 },
+  { id: '5', name: 'Board Games', slug: 'board-games', productCount: 18 },
+  { id: '6', name: 'Vehicles', slug: 'vehicles', productCount: 22 },
+  { id: '7', name: 'Arts & Crafts', slug: 'arts-crafts', productCount: 16 },
+  { id: '8', name: 'Electronic Toys', slug: 'electronic-toys', productCount: 12 },
+  { id: '9', name: 'Educational Toys', slug: 'educational-toys', productCount: 14 },
+  { id: '10', name: 'Outdoor Toys', slug: 'outdoor-toys', productCount: 10 }
+];
 
 // Get price range for filters
 export const getPriceRange = async (): Promise<{ min: number; max: number }> => {
   try {
-    // In a real app, you might want to cache this or store it separately
     const productsRef = collection(db, 'products');
     const querySnapshot = await getDocs(productsRef);
     
@@ -189,6 +224,74 @@ export const getPriceRange = async (): Promise<{ min: number; max: number }> => 
   } catch (error) {
     console.error('Error fetching price range:', error);
     return { min: 0, max: 10000 };
+  }
+};
+
+// Get product by ID
+export const getProductById = async (id: string): Promise<Product | null> => {
+  try {
+    const productsRef = collection(db, 'products');
+    const q = query(productsRef, where('id', '==', id));
+    const querySnapshot = await getDocs(q);
+    
+    if (querySnapshot.empty) {
+      // Try fallback products
+      const fallbackProduct = getFallbackProducts().find(p => p.id === id);
+      return fallbackProduct || null;
+    }
+    
+    const doc = querySnapshot.docs[0];
+    const data = doc.data();
+    
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate() || new Date(),
+      updatedAt: data.updatedAt?.toDate() || new Date(),
+    } as Product;
+  } catch (error) {
+    console.error('Error fetching product:', error);
+    return getFallbackProducts().find(p => p.id === id) || null;
+  }
+};
+
+// Search products
+export const searchProducts = async (searchTerm: string, limit: number = 10): Promise<Product[]> => {
+  try {
+    // For now, we'll use client-side search on all products
+    // In production, you might want to use Algolia or similar for better search
+    const productsRef = collection(db, 'products');
+    const querySnapshot = await getDocs(productsRef);
+    
+    const allProducts = querySnapshot.docs.map(doc => {
+      const data = doc.data();
+      return {
+        id: doc.id,
+        ...data,
+        createdAt: data.createdAt?.toDate() || new Date(),
+        updatedAt: data.updatedAt?.toDate() || new Date(),
+      } as Product;
+    });
+
+    const searchTermLower = searchTerm.toLowerCase();
+    const filteredProducts = allProducts.filter(product =>
+      product.name.toLowerCase().includes(searchTermLower) ||
+      product.description.toLowerCase().includes(searchTermLower) ||
+      product.tags.some(tag => tag.toLowerCase().includes(searchTermLower)) ||
+      product.category.toLowerCase().includes(searchTermLower)
+    );
+
+    return filteredProducts.slice(0, limit);
+  } catch (error) {
+    console.error('Error searching products:', error);
+    const searchTermLower = searchTerm.toLowerCase();
+    return getFallbackProducts()
+      .filter(product =>
+        product.name.toLowerCase().includes(searchTermLower) ||
+        product.description.toLowerCase().includes(searchTermLower) ||
+        product.tags.some(tag => tag.toLowerCase().includes(searchTermLower))
+      )
+      .slice(0, limit);
   }
 };
 

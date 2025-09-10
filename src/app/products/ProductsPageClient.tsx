@@ -14,8 +14,10 @@ import {
   getProductCategories, 
   getPriceRange,
   getFallbackProducts,
+  getFallbackCategories,
   Product, 
-  ProductFilters as Filters 
+  ProductFilters as Filters,
+  Category
 } from '@/lib/products';
 
 export default function ProductsPageClient() {
@@ -27,12 +29,13 @@ export default function ProductsPageClient() {
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [categories, setCategories] = useState<any[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [priceRange, setPriceRange] = useState({ min: 0, max: 10000 });
   const [hasMore, setHasMore] = useState(true);
   const [lastDoc, setLastDoc] = useState<any>(null);
   const [filtersOpen, setFiltersOpen] = useState(false);
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
+  const [totalProducts, setTotalProducts] = useState(0);
 
   // Get filters from URL
   const getFiltersFromURL = useCallback((): Filters => {
@@ -77,19 +80,7 @@ export default function ProductsPageClient() {
           getPriceRange()
         ]);
 
-        // Fallback categories if Firestore fails
-        const fallbackCategories = [
-          { id: '1', name: 'Action Figures', slug: 'action-figures', productCount: 25 },
-          { id: '2', name: 'Dolls & Accessories', slug: 'dolls-accessories', productCount: 30 },
-          { id: '3', name: 'Building Blocks', slug: 'building-blocks', productCount: 20 },
-          { id: '4', name: 'Puzzles', slug: 'puzzles', productCount: 15 },
-          { id: '5', name: 'Board Games', slug: 'board-games', productCount: 18 },
-          { id: '6', name: 'Vehicles', slug: 'vehicles', productCount: 22 },
-          { id: '7', name: 'Arts & Crafts', slug: 'arts-crafts', productCount: 16 },
-          { id: '8', name: 'Electronic Toys', slug: 'electronic-toys', productCount: 12 }
-        ];
-
-        setCategories(categoriesData.length > 0 ? categoriesData : fallbackCategories);
+        setCategories(categoriesData);
         setPriceRange(priceRangeData);
 
         // Load products
@@ -97,7 +88,9 @@ export default function ProductsPageClient() {
       } catch (error) {
         console.error('Error loading initial data:', error);
         // Use fallback data
+        setCategories(getFallbackCategories());
         setProducts(getFallbackProducts());
+        setTotalProducts(getFallbackProducts().length);
       } finally {
         setLoading(false);
       }
@@ -176,10 +169,12 @@ export default function ProductsPageClient() {
         }
 
         setProducts(filteredFallback);
+        setTotalProducts(filteredFallback.length);
         setHasMore(false);
       } else {
         if (reset) {
           setProducts(response.products);
+          setTotalProducts(response.total);
         } else {
           setProducts(prev => [...prev, ...response.products]);
         }
@@ -190,6 +185,7 @@ export default function ProductsPageClient() {
       console.error('Error loading products:', error);
       if (reset) {
         setProducts(getFallbackProducts());
+        setTotalProducts(getFallbackProducts().length);
         setHasMore(false);
       }
     } finally {
@@ -301,9 +297,14 @@ export default function ProductsPageClient() {
             {/* Results Count */}
             <div className="flex items-center justify-between mb-6">
               <p className="text-gray-600">
-                Showing {products.length} products
+                Showing {products.length} of {totalProducts} products
                 {filters.search && ` for "${filters.search}"`}
               </p>
+              {filters.category && (
+                <p className="text-sm text-gray-500">
+                  in {getCategoryName(filters.category)}
+                </p>
+              )}
             </div>
 
             {/* Products */}

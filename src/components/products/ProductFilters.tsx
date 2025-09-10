@@ -8,12 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProductFilters as Filters } from '@/lib/products';
 
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  productCount: number;
-}
+import { Category } from '@/lib/products';
 
 interface ProductFiltersProps {
   filters: Filters;

@@ -1,38 +1,21 @@
 import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import ProductsPageClient from '../ProductsPageClient';
+import { getFallbackCategories } from '@/lib/products';
 
 interface Props {
   params: { category: string };
   searchParams: { [key: string]: string | string[] | undefined };
 }
 
-// Valid category slugs
-const validCategories = [
-  'action-figures',
-  'dolls-accessories', 
-  'building-blocks',
-  'puzzles',
-  'board-games',
-  'vehicles',
-  'arts-crafts',
-  'electronic-toys',
-  'educational-toys',
-  'outdoor-toys'
-];
+// Get valid category slugs from fallback data
+const validCategories = getFallbackCategories().map(cat => cat.slug);
 
-const categoryNames: Record<string, string> = {
-  'action-figures': 'Action Figures',
-  'dolls-accessories': 'Dolls & Accessories',
-  'building-blocks': 'Building Blocks',
-  'puzzles': 'Puzzles',
-  'board-games': 'Board Games',
-  'vehicles': 'Vehicles',
-  'arts-crafts': 'Arts & Crafts',
-  'electronic-toys': 'Electronic Toys',
-  'educational-toys': 'Educational Toys',
-  'outdoor-toys': 'Outdoor Toys'
-};
+// Create category names mapping
+const categoryNames: Record<string, string> = getFallbackCategories().reduce((acc, cat) => {
+  acc[cat.slug] = cat.name;
+  return acc;
+}, {} as Record<string, string>);
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { category } = params;
