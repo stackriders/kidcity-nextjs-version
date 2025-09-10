@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, ShoppingCart, User, Menu, Heart, MapPin, Phone, ChevronDown, Gift } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from '@/components/ui/sheet';
 import { useCart } from '@/contexts/CartContext';
 import { useAuth } from '@/contexts/AuthContext';
 
@@ -227,8 +227,10 @@ export default function Navbar() {
                   </Button>
                 </SheetTrigger>
                 <SheetContent side="right" className="w-80">
+                  <SheetHeader>
+                    <SheetTitle className="text-2xl font-black text-red-600">Hamleys</SheetTitle>
+                  </SheetHeader>
                   <div className="flex flex-col space-y-6 mt-8">
-                    <div className="text-2xl font-black text-red-600">Hamleys</div>
                     
                     {/* Categories */}
                     <div>
