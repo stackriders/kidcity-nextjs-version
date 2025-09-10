@@ -47,19 +47,19 @@ export default function Navbar() {
           <div className="flex items-center space-x-6">
             <div className="flex items-center space-x-2">
               <Phone className="w-4 h-4" />
-              <span className="font-medium">1800-266-0777</span>
+              <span className="font-medium text-sm">1800-266-0777</span>
             </div>
             <div className="flex items-center space-x-2">
               <MapPin className="w-4 h-4" />
-              <span className="font-medium">Store Locator</span>
+              <span className="font-medium text-sm">Store Locator</span>
             </div>
           </div>
           <div className="hidden md:flex items-center space-x-6">
-            <span className="font-medium">Free Shipping on Orders Above ₹999</span>
+            <span className="font-medium text-sm">Free Shipping on Orders Above ₹999</span>
             <span>|</span>
             <div className="flex items-center space-x-2">
               <Gift className="w-4 h-4" />
-              <span className="font-medium">Gift Cards</span>
+              <span className="font-medium text-sm">Gift Cards</span>
             </div>
           </div>
         </div>

@@ -59,7 +59,7 @@ export default function HeroBanner() {
   };
 
   return (
-    <section className="relative h-[400px] md:h-[500px] lg:h-[600px] overflow-hidden bg-gray-900">
+    <section className="relative h-[450px] md:h-[550px] lg:h-[650px] overflow-hidden bg-gray-900">
       <AnimatePresence mode="wait">
         <motion.div
           key={currentSlide}
@@ -82,23 +82,23 @@ export default function HeroBanner() {
           </div>
 
           {/* Content */}
-          <div className="relative z-10 container mx-auto px-4 h-full flex items-center">
-            <div className="w-full max-w-2xl text-white">
+          <div className="relative z-10 container mx-auto px-4 h-full flex items-center justify-center lg:justify-start">
+            <div className="w-full max-w-3xl text-white text-center lg:text-left">
               <motion.div
                 initial={{ opacity: 0, y: 60 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2, duration: 0.8 }}
-                className="space-y-4 md:space-y-6"
+                className="space-y-6 md:space-y-8"
               >
                 {/* Badge */}
                 <motion.div
                   initial={{ scale: 0, rotate: -10 }}
                   animate={{ scale: 1, rotate: 0 }}
                   transition={{ delay: 0.4, type: "spring", stiffness: 200 }}
-                  className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-3 py-1 md:px-4 md:py-2 border border-white/30"
+                  className="inline-flex items-center bg-white/20 backdrop-blur-sm rounded-full px-4 py-2 md:px-6 md:py-3 border border-white/30"
                 >
                   <Star className="w-4 h-4 mr-2 text-yellow-300" />
-                  <span className="text-xs md:text-sm font-bold tracking-wide">{heroSlides[currentSlide].badge}</span>
+                  <span className="text-sm md:text-base font-bold tracking-wide">{heroSlides[currentSlide].badge}</span>
                 </motion.div>
 
                 {/* Subtitle */}
@@ -106,7 +106,7 @@ export default function HeroBanner() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.3, duration: 0.8 }}
-                  className="text-base md:text-lg lg:text-xl font-bold tracking-wide opacity-90"
+                  className="text-lg md:text-xl lg:text-2xl font-bold tracking-wide opacity-90"
                 >
                   {heroSlides[currentSlide].subtitle}
                 </motion.h2>
@@ -116,7 +116,7 @@ export default function HeroBanner() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.4, duration: 0.8 }}
-                  className="text-2xl md:text-4xl lg:text-5xl xl:text-6xl font-black leading-tight tracking-tight"
+                  className="text-3xl md:text-5xl lg:text-6xl xl:text-7xl font-black leading-tight tracking-tight"
                 >
                   {heroSlides[currentSlide].title}
                 </motion.h1>
@@ -126,7 +126,7 @@ export default function HeroBanner() {
                   initial={{ opacity: 0, x: -30 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.5, duration: 0.8 }}
-                  className="text-sm md:text-base lg:text-lg opacity-95 max-w-xl leading-relaxed"
+                  className="text-base md:text-lg lg:text-xl opacity-95 max-w-2xl leading-relaxed"
                 >
                   {heroSlides[currentSlide].description}
                 </motion.p>
@@ -136,11 +136,11 @@ export default function HeroBanner() {
                   initial={{ opacity: 0, y: 30 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6, duration: 0.8 }}
-                  className="pt-2 md:pt-4"
+                  className="pt-4 md:pt-6"
                 >
                   <Button
                     size="lg"
-                    className="bg-white text-red-600 hover:bg-red-50 font-black px-6 py-3 md:px-8 md:py-4 rounded-full text-base md:text-lg shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
+                    className="bg-white text-red-600 hover:bg-red-50 font-black px-8 py-4 md:px-12 md:py-5 rounded-full text-lg md:text-xl shadow-xl hover:shadow-2xl transition-all duration-300 transform hover:scale-105"
                   >
                     {heroSlides[currentSlide].cta}
                   </Button>
@@ -153,15 +153,15 @@ export default function HeroBanner() {
               initial={{ opacity: 0, scale: 0.8 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="hidden xl:block absolute top-8 right-8 text-white text-right"
+              className="hidden xl:block absolute top-12 right-12 text-white text-right"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 lg:p-6 border border-white/20">
-                <div className="text-sm font-bold mb-2 opacity-80">TRUSTED SINCE</div>
-                <div className="text-3xl lg:text-5xl font-black mb-1">1760</div>
-                <div className="text-xs opacity-70 mb-4">260+ YEARS OF JOY</div>
-                <div className="border-t border-white/20 pt-4">
-                  <div className="text-xl lg:text-2xl font-bold">50M+</div>
-                  <div className="text-xs opacity-70">Happy Customers</div>
+              <div className="bg-white/15 backdrop-blur-sm rounded-3xl p-6 lg:p-8 border border-white/30 shadow-2xl">
+                <div className="text-sm font-bold mb-3 opacity-90 tracking-wide">TRUSTED SINCE</div>
+                <div className="text-4xl lg:text-6xl font-black mb-2 text-yellow-300">1760</div>
+                <div className="text-sm opacity-80 mb-6 font-medium">260+ YEARS OF JOY</div>
+                <div className="border-t border-white/30 pt-6">
+                  <div className="text-2xl lg:text-3xl font-bold mb-1">50M+</div>
+                  <div className="text-sm opacity-80 font-medium">Happy Customers</div>
                 </div>
               </div>
             </motion.div>

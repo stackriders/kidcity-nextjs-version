@@ -122,7 +122,7 @@ export default function CategoryGrid() {
         </motion.div>
 
         {/* Categories Grid - Hamleys Style */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 md:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 md:gap-8">
           {categories.map((category, index) => (
             <motion.div
               key={category.id}
@@ -130,46 +130,46 @@ export default function CategoryGrid() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8, scale: 1.02 }}
+              whileHover={{ y: -12, scale: 1.05 }}
               className="group"
             >
               <Link href={`/category/${category.slug}`}>
-                <div className="relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 bg-white">
+                <div className="relative overflow-hidden rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 bg-white border border-gray-100">
                   {/* Background Image */}
-                  <div className="relative h-32 sm:h-40 md:h-48">
+                  <div className="relative h-36 sm:h-44 md:h-52">
                     <Image
                       src={category.image}
                       alt={category.name}
                       fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                      className="object-cover group-hover:scale-115 transition-transform duration-700"
                       loading="lazy"
                     />
-                    <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-85`} />
+                    <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-90`} />
                     
                     {/* Hover Overlay */}
-                    <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                   </div>
 
                   {/* Content */}
-                  <div className="relative z-10 p-3 md:p-4 text-center bg-white">
-                    <div className="text-2xl md:text-3xl mb-2">{category.icon}</div>
-                    <h3 className="font-bold text-gray-900 text-xs md:text-sm mb-1 group-hover:text-red-600 transition-colors duration-200 leading-tight">
+                  <div className="relative z-10 p-4 md:p-6 text-center bg-white">
+                    <div className="text-3xl md:text-4xl mb-3 group-hover:scale-110 transition-transform duration-300">{category.icon}</div>
+                    <h3 className="font-bold text-gray-900 text-sm md:text-base mb-2 group-hover:text-red-600 transition-colors duration-300 leading-tight">
                       {category.name}
                     </h3>
-                    <p className="text-gray-500 text-xs mb-2 md:mb-3">
+                    <p className="text-gray-500 text-xs md:text-sm mb-3 md:mb-4 font-medium">
                       {category.productCount}+ products
                     </p>
                     
                     {/* Shop Now Button */}
-                    <div className="flex items-center justify-center text-red-600 font-bold text-xs group-hover:text-red-700 transition-colors">
+                    <div className="flex items-center justify-center text-red-600 font-bold text-sm group-hover:text-red-700 transition-colors">
                       <span>Shop Now</span>
-                      <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-1 transition-transform" />
+                      <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform duration-300" />
                     </div>
                   </div>
 
                   {/* Floating Action */}
-                  <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm rounded-full p-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <ArrowRight className="w-4 h-4 text-red-600" />
+                  <div className="absolute top-4 right-4 bg-white/95 backdrop-blur-sm rounded-full p-3 opacity-0 group-hover:opacity-100 transition-all duration-300 shadow-lg">
+                    <ArrowRight className="w-5 h-5 text-red-600" />
                   </div>
                 </div>
               </Link>

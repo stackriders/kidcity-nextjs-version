@@ -88,9 +88,9 @@ export default function Footer() {
   return (
     <footer className="bg-gray-900 text-white">
       {/* Features Bar */}
-      <div className="bg-gray-800 border-b border-gray-700">
-        <div className="container mx-auto px-4 py-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+      <div className="bg-gray-800 border-b border-gray-700 py-6">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {features.map((feature, index) => (
               <motion.div
                 key={feature.title}
@@ -98,14 +98,14 @@ export default function Footer() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1 }}
-                className="flex items-center space-x-3"
+                className="flex items-center space-x-4 text-center md:text-left justify-center md:justify-start"
               >
-                <div className="bg-red-600 rounded-full p-3">
-                  <feature.icon className="w-5 h-5 text-white" />
+                <div className="bg-red-600 rounded-full p-4 shadow-lg">
+                  <feature.icon className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-sm">{feature.title}</h4>
-                  <p className="text-gray-400 text-xs">{feature.description}</p>
+                  <h4 className="font-bold text-base text-white">{feature.title}</h4>
+                  <p className="text-gray-300 text-sm font-medium">{feature.description}</p>
                 </div>
               </motion.div>
             ))}

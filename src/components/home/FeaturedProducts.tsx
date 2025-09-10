@@ -177,7 +177,7 @@ export default function FeaturedProducts() {
         </motion.div>
 
         {/* Products Grid - Hamleys Style */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 md:gap-8">
           {featuredProducts.map((product, index) => (
             <motion.div
               key={product.id}
@@ -185,25 +185,25 @@ export default function FeaturedProducts() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -8 }}
+              whileHover={{ y: -12 }}
               className="group"
             >
-              <Card className="overflow-hidden border-0 shadow-lg hover:shadow-2xl transition-all duration-300 bg-white rounded-2xl h-full">
+              <Card className="overflow-hidden border border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-500 bg-white rounded-3xl h-full">
                 <div className="relative">
                   {/* Product Image */}
                   <Link href={`/product/${product.id}`}>
-                    <div className="relative h-48 md:h-64 overflow-hidden bg-gray-50 cursor-pointer">
+                    <div className="relative h-52 md:h-72 overflow-hidden bg-gray-50 cursor-pointer rounded-t-3xl">
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        className="object-cover group-hover:scale-115 transition-transform duration-700"
                         loading="lazy"
                       />
                       
                       {/* Badge */}
                       {product.badge && (
-                        <div className={`absolute top-2 left-2 md:top-3 md:left-3 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-2 py-1 md:px-3 md:py-1 rounded-full text-xs font-bold shadow-lg`}>
+                        <div className={`absolute top-3 left-3 md:top-4 md:left-4 ${badgeColors[product.badge as keyof typeof badgeColors]} text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold shadow-lg`}>
                           {product.badge}
                         </div>
                       )}
@@ -211,7 +211,7 @@ export default function FeaturedProducts() {
                       {/* Stock Status */}
                       {!product.inStock && (
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                          <span className="bg-red-600 text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold">
+                          <span className="bg-red-600 text-white px-4 py-2 md:px-6 md:py-3 rounded-full text-sm md:text-base font-bold shadow-lg">
                             Out of Stock
                           </span>
                         </div>
@@ -219,7 +219,7 @@ export default function FeaturedProducts() {
 
                       {/* Discount Badge */}
                       {product.originalPrice > product.price && (
-                        <div className="absolute bottom-2 left-2 md:bottom-3 md:left-3 bg-green-600 text-white px-2 py-1 rounded text-xs font-bold">
+                        <div className="absolute bottom-3 left-3 md:bottom-4 md:left-4 bg-green-600 text-white px-3 py-1 md:px-4 md:py-2 rounded-full text-xs md:text-sm font-bold shadow-lg">
                           {Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)}% OFF
                         </div>
                       )}
@@ -227,23 +227,23 @@ export default function FeaturedProducts() {
                   </Link>
 
                   {/* Quick Actions - Hamleys Style */}
-                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-1 md:space-x-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                  <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 flex space-x-2 md:space-x-3 opacity-0 group-hover:opacity-100 transition-all duration-500">
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
-                      className="bg-white/95 backdrop-blur-sm rounded-full p-2 md:p-3 shadow-xl hover:bg-white transition-colors"
+                      className="bg-white/95 backdrop-blur-sm rounded-full p-3 md:p-4 shadow-xl hover:bg-white transition-colors"
                       aria-label="Add to wishlist"
                     >
-                      <Heart className="w-5 h-5 text-gray-700 hover:text-red-600 transition-colors" />
+                      <Heart className="w-5 h-5 md:w-6 md:h-6 text-gray-700 hover:text-red-600 transition-colors" />
                     </motion.button>
                     <Link href={`/product/${product.id}`}>
                       <motion.button
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
-                        className="bg-white/95 backdrop-blur-sm rounded-full p-2 md:p-3 shadow-xl hover:bg-white transition-colors"
+                        className="bg-white/95 backdrop-blur-sm rounded-full p-3 md:p-4 shadow-xl hover:bg-white transition-colors"
                         aria-label="Quick view"
                       >
-                        <Eye className="w-5 h-5 text-gray-700 hover:text-blue-600 transition-colors" />
+                        <Eye className="w-5 h-5 md:w-6 md:h-6 text-gray-700 hover:text-blue-600 transition-colors" />
                       </motion.button>
                     </Link>
                     {product.inStock && (
@@ -251,44 +251,44 @@ export default function FeaturedProducts() {
                         whileHover={{ scale: 1.1 }}
                         whileTap={{ scale: 0.9 }}
                         onClick={() => handleAddToCart(product)}
-                        className="bg-red-600 text-white rounded-full p-2 md:p-3 shadow-xl hover:bg-red-700 transition-colors"
+                        className="bg-red-600 text-white rounded-full p-3 md:p-4 shadow-xl hover:bg-red-700 transition-colors"
                         aria-label="Add to cart"
                       >
-                        <ShoppingCart className="w-5 h-5" />
+                        <ShoppingCart className="w-5 h-5 md:w-6 md:h-6" />
                       </motion.button>
                     )}
                   </div>
 
-                  <CardContent className="p-4 md:p-6">
+                  <CardContent className="p-5 md:p-7">
                     {/* Brand & Age */}
-                    <div className="flex justify-between items-center mb-2 md:mb-3">
-                      <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-1 rounded-full">
+                    <div className="flex justify-between items-center mb-3 md:mb-4">
+                      <span className="text-xs md:text-sm font-bold text-red-600 bg-red-50 px-3 py-1 rounded-full">
                         {product.brand}
                       </span>
-                      <span className="text-xs text-gray-500 font-medium">
+                      <span className="text-xs md:text-sm text-gray-500 font-medium">
                         {product.ageRange}
                       </span>
                     </div>
                     
                     {/* Product Name */}
                     <Link href={`/product/${product.id}`}>
-                      <h3 className="font-bold text-base md:text-lg text-gray-900 mb-2 line-clamp-2 group-hover:text-red-600 transition-colors cursor-pointer leading-tight">
+                      <h3 className="font-bold text-lg md:text-xl text-gray-900 mb-3 line-clamp-2 group-hover:text-red-600 transition-colors cursor-pointer leading-tight">
                         {product.name}
                       </h3>
                     </Link>
 
                     {/* Description */}
-                    <p className="text-xs md:text-sm text-gray-600 mb-3 md:mb-4 line-clamp-2 leading-relaxed">
+                    <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-5 line-clamp-2 leading-relaxed">
                       {product.description}
                     </p>
 
                     {/* Rating */}
-                    <div className="flex items-center space-x-1 md:space-x-2 mb-3 md:mb-4">
+                    <div className="flex items-center space-x-2 md:space-x-3 mb-4 md:mb-5">
                       <div className="flex">
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className={`w-4 h-4 ${
+                            className={`w-4 h-4 md:w-5 md:h-5 ${
                               i < Math.floor(product.rating)
                                 ? 'text-yellow-400 fill-current'
                                 : 'text-gray-300'
@@ -296,19 +296,19 @@ export default function FeaturedProducts() {
                           />
                         ))}
                       </div>
-                      <span className="text-xs md:text-sm text-gray-600 font-medium">
+                      <span className="text-sm md:text-base text-gray-600 font-medium">
                         {product.rating} ({product.reviews})
                       </span>
                     </div>
 
                     {/* Price */}
-                    <div className="flex items-center justify-between mb-3 md:mb-4">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-lg md:text-2xl font-black text-red-600">
+                    <div className="flex items-center justify-between mb-4 md:mb-6">
+                      <div className="flex items-center space-x-3">
+                        <span className="text-xl md:text-3xl font-black text-red-600">
                           ₹{product.price.toLocaleString()}
                         </span>
                         {product.originalPrice > product.price && (
-                          <span className="text-xs md:text-sm text-gray-500 line-through">
+                          <span className="text-sm md:text-base text-gray-500 line-through">
                             ₹{product.originalPrice.toLocaleString()}
                           </span>
                         )}
@@ -318,7 +318,7 @@ export default function FeaturedProducts() {
                     {/* Add to Cart Button */}
                     <Button
                       onClick={() => handleAddToCart(product)}
-                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 md:py-3 rounded-full transition-all duration-200 transform hover:scale-105 shadow-lg hover:shadow-xl text-sm md:text-base"
+                      className="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 md:py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl text-base md:text-lg"
                       disabled={!product.inStock}
                     >
                       {product.inStock ? 'ADD TO CART' : 'OUT OF STOCK'}
