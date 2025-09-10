@@ -34,6 +34,7 @@ export interface Product {
   tags: string[];
   createdAt: Date;
   updatedAt: Date;
+  slug?: string;
 }
 
 export interface ProductFilters {
@@ -255,6 +256,87 @@ export const getProductById = async (id: string): Promise<Product | null> => {
   }
 };
 
+// Get product by slug
+export const getProductBySlug = async (slug: string): Promise<Product | null> => {
+  try {
+    const productsRef = collection(db, 'products');
+    const q = query(productsRef, where('slug', '==', slug));
+    const querySnapshot = await getDocs(q);
+    
+    if (querySnapshot.empty) {
+      // Try fallback products by slug or id
+      const fallbackProduct = getFallbackProducts().find(p => 
+        (p.slug && p.slug === slug) || p.id === slug
+      );
+      return fallbackProduct || null;
+    }
+    
+    const doc = querySnapshot.docs[0];
+    const data = doc.data();
+    
+    return {
+      id: doc.id,
+      ...data,
+      createdAt: data.createdAt?.toDate() || new Date(),
+      updatedAt: data.updatedAt?.toDate() || new Date(),
+    } as Product;
+  } catch (error) {
+    console.error('Error fetching product by slug:', error);
+    return getFallbackProducts().find(p => 
+      (p.slug && p.slug === slug) || p.id === slug
+    ) || null;
+  }
+};
+
+// Get related products
+export const getRelatedProducts = async (
+  categorySlug: string, 
+  excludeId: string, 
+  limit: number = 4
+): Promise<Product[]> => {
+  try {
+    const productsRef = collection(db, 'products');
+    const q = query(
+      productsRef,
+      where('categorySlug', '==', categorySlug),
+      where('inStock', '==', true),
+      orderBy('rating', 'desc'),
+      limit(limit + 1) // Get one extra to account for excluded product
+    );
+    
+    const querySnapshot = await getDocs(q);
+    const products: Product[] = [];
+    
+    querySnapshot.docs.forEach((doc) => {
+      if (doc.id !== excludeId && products.length < limit) {
+        const data = doc.data();
+        products.push({
+          id: doc.id,
+          ...data,
+          createdAt: data.createdAt?.toDate() || new Date(),
+          updatedAt: data.updatedAt?.toDate() || new Date(),
+        } as Product);
+      }
+    });
+
+    // If not enough products from Firestore, use fallback
+    if (products.length < limit) {
+      const fallbackProducts = getFallbackProducts()
+        .filter(p => p.categorySlug === categorySlug && p.id !== excludeId && p.inStock)
+        .slice(0, limit);
+      
+      return fallbackProducts;
+    }
+    
+    return products;
+  } catch (error) {
+    console.error('Error fetching related products:', error);
+    return getFallbackProducts()
+      .filter(p => p.categorySlug === categorySlug && p.id !== excludeId && p.inStock)
+      .slice(0, limit);
+  }
+};
+
 // Search products
 export const searchProducts = async (searchTerm: string, limit: number = 10): Promise<Product[]> => {
   try {
@@ -317,7 +399,8 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'Marvel',
     tags: ['superhero', 'action', 'collectible'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'super-hero-action-figure'
   },
   {
     id: '2',
@@ -339,7 +422,8 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'LEGO',
     tags: ['educational', 'building', 'creative'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'educational-building-blocks'
   },
   {
     id: '3',
@@ -361,7 +445,8 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'Barbie',
     tags: ['doll', 'princess', 'accessories'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'princess-doll-set'
   },
   {
     id: '4',
@@ -383,7 +468,8 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'Hot Wheels',
     tags: ['car', 'remote control', 'racing'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'remote-control-racing-car'
   },
   {
     id: '5',
@@ -405,7 +491,8 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'Crayola',
     tags: ['art', 'craft', 'creative', 'drawing'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'art-craft-mega-kit'
   },
   {
     id: '6',
@@ -427,7 +514,8 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'Ravensburger',
     tags: ['puzzle', 'challenging', 'brain teaser'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'challenging-puzzle-adventure'
   },
   {
     id: '7',
@@ -449,7 +537,8 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'LeapFrog',
     tags: ['electronic', 'learning', 'educational', 'tablet'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'electronic-learning-tablet'
   },
   {
     id: '8',
@@ -471,6 +560,7 @@ export const getFallbackProducts = (): Product[] => [
     brand: 'Hasbro',
     tags: ['board game', 'family', 'strategy'],
     createdAt: new Date(),
-    updatedAt: new Date()
+    updatedAt: new Date(),
+    slug: 'board-game-family-pack'
   }
 ];
