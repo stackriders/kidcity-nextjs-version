@@ -4,21 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Star, 
-  Heart, 
-  Share2, 
-  Minus, 
-  Plus, 
-  ShoppingCart, 
-  Truck, 
-  Shield, 
-  RotateCcw,
-  ChevronLeft,
-  ChevronRight,
-  Zoom,
-  X
-} from 'lucide-react';
+import { Star, Heart, Share2, Minus, Plus, ShoppingCart, Truck, Shield, RotateCcw, ChevronLeft, ChevronRight, ZoomIn as Zoom, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
