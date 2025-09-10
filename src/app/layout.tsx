@@ -1,12 +1,9 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
 import './globals.css';
 import { AuthProvider } from '@/contexts/AuthContext';
 import { CartProvider } from '@/contexts/CartContext';
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
-
-const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Hamleys - The Finest Toy Shop in the World | Premium Toys & Games',
@@ -76,7 +73,6 @@ export default function RootLayout({
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
-        <meta name="theme-color" content="#ec4899" />
         <meta name="theme-color" content="#dc2626" />
         <meta name="msapplication-TileColor" content="#dc2626" />
         <meta name="application-name" content="Hamleys" />
@@ -85,8 +81,10 @@ export default function RootLayout({
         <meta name="apple-mobile-web-app-title" content="Hamleys" />
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="preconnect" href="https://images.pexels.com" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
       </head>
-      <body className={inter.className}>
+      <body className="font-sans antialiased">
         <AuthProvider>
           <CartProvider>
             <div className="min-h-screen flex flex-col">

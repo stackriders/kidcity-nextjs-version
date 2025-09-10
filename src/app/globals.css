@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Import Inter font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
 @layer base {
   :root {
     --background: 0 0% 100%;
@@ -55,7 +58,11 @@
   }
   body {
     @apply bg-background text-foreground;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+    font-variation-settings: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
@@ -66,7 +73,7 @@ html {
 
 /* Optimize font loading */
 body {
-  font-display: swap;
+  font-display: swap !important;
 }
 
 /* Custom scrollbar */
@@ -88,6 +95,13 @@ body {
 }
 
 /* Line clamp utility */
+.line-clamp-1 {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .line-clamp-2 {
   display: -webkit-box;
   -webkit-line-clamp: 2;
@@ -118,7 +132,11 @@ body {
 }
 
 /* Focus styles for accessibility */
-.focus-ring {
+.focus-ring,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   @apply focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2;
 }
 
@@ -140,11 +158,17 @@ body {
 /* Image lazy loading optimization */
 img[loading="lazy"] {
   opacity: 0;
-  transition: opacity 0.3s;
+  transition: opacity 0.3s ease-in-out;
 }
 
 img[loading="lazy"].loaded {
   opacity: 1;
+}
+
+/* Ensure images don't break layout */
+img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Hover effects for product cards */
@@ -194,4 +218,96 @@ img[loading="lazy"].loaded {
   background: linear-gradient(135deg, #b91c1c 0%, #991b1b 100%);
   transform: translateY(-2px);
   box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+}
+
+/* Fix any layout issues */
+* {
+  box-sizing: border-box;
+}
+
+/* Ensure proper text rendering */
+body, input, textarea, select, button {
+  text-rendering: optimizeLegibility;
+}
+
+/* Fix potential z-index issues */
+.fixed {
+  z-index: 50;
+}
+
+.sticky {
+  z-index: 40;
+}
+
+/* Ensure proper button styling */
+button {
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  font-family: inherit;
+}
+
+button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* Fix input styling */
+input, textarea, select {
+  font-family: inherit;
+  font-size: inherit;
+}
+
+/* Ensure proper link styling */
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Fix any flexbox issues */
+.flex {
+  display: flex;
+}
+
+.grid {
+  display: grid;
+}
+
+/* Ensure proper spacing */
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
 }
