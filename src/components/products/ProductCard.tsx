@@ -8,6 +8,8 @@ import { Star, Heart, ShoppingCart, Eye } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
 import { useCart } from '@/contexts/CartContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { addToWishlist, removeFromWishlist, isInWishlist } from '@/lib/wishlist';
 import { Product } from '@/lib/products';
 
 interface ProductCardProps {
@@ -17,6 +19,20 @@ interface ProductCardProps {
 
 export default function ProductCard({ product, index = 0 }: ProductCardProps) {
   const { addItem } = useCart();
+  const { user } = useAuth();
+  const [isWishlisted, setIsWishlisted] = React.useState(false);
+  const [wishlistLoading, setWishlistLoading] = React.useState(false);
+
+  React.useEffect(() => {
+    const checkWishlistStatus = async () => {
+      if (user) {
+        const inWishlist = await isInWishlist(user.uid, product.id);
+        setIsWishlisted(inWishlist);
+      }
+    };
+
+    checkWishlistStatus();
+  }, [user, product.id]);
 
   const handleAddToCart = () => {
     addItem({
@@ -25,6 +41,35 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
       price: product.price,
       image: product.image
     });
+  };
+
+  const handleWishlistToggle = async () => {
+    if (!user) {
+      // Redirect to login or show login modal
+      return;
+    }
+
+    setWishlistLoading(true);
+    try {
+      if (isWishlisted) {
+        await removeFromWishlist(user.uid, product.id);
+        setIsWishlisted(false);
+      } else {
+        await addToWishlist(
+          user.uid,
+          product.id,
+          product.name,
+          product.price,
+          product.image,
+          product.rating
+        );
+        setIsWishlisted(true);
+      }
+    } catch (error) {
+      console.error('Error toggling wishlist:', error);
+    } finally {
+      setWishlistLoading(false);
+    }
   };
 
   const badgeColors = {
@@ -91,12 +136,16 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           {/* Action Buttons */}
           <div className="absolute top-3 right-3 flex flex-col space-y-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <motion.button
+              onClick={handleWishlistToggle}
+              disabled={wishlistLoading}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-md hover:bg-white transition-colors"
+              className={`bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-md hover:bg-white transition-colors ${
+                isWishlisted ? 'text-red-600' : 'text-gray-700'
+              }`}
               aria-label="Add to wishlist"
             >
-              <Heart className="w-4 h-4 text-gray-700 hover:text-red-600 transition-colors" />
+              <Heart className={`w-4 h-4 transition-colors ${isWishlisted ? 'fill-current' : ''}`} />
             </motion.button>
             <Link href={`/product/${product.id}`}>
               <motion.button
