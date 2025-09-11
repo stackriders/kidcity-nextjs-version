@@ -119,7 +119,7 @@ export default function Footer() {
                 Privacy Policy
               </Link>
               <Link href="/terms" className="text-gray-500 hover:text-red-600 transition-colors">
-                Terms of Service
+                Terms of Service Rama
               </Link>
             </div>
           </div>
